@@ -174,7 +174,7 @@ export function PlansSection() {
             type="button"
             aria-label="Anterior"
             onClick={() => scrollToIndex(activeIndex - 1)}
-            className="absolute top-1/2 left-0 z-20 -translate-x-2 -translate-y-1/2 rounded-full border border-black/15 bg-white/85 p-2 text-black/70 backdrop-blur transition-colors hover:border-black/40 hover:text-black hidden md:inline-flex"
+            className="absolute top-1/2 left-0 z-20 inline-flex -translate-x-2 -translate-y-1/2 rounded-full border border-black/15 bg-white/85 p-2 text-black/70 backdrop-blur transition-colors hover:border-black/40 hover:text-black md:hidden"
           >
             <ChevronLeft width={18} height={18} strokeWidth={1.5} aria-hidden="true" />
           </button>
