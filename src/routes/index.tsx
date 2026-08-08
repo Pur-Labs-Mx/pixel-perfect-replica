@@ -1,24 +1,58 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import { AnnouncementBar, GrainOverlay, ScrollProgress } from "@/components/landing/Chrome";
+import { ComparisonSection } from "@/components/landing/ComparisonSection";
+import { ConvertSection } from "@/components/landing/ConvertSection";
+import { FaqSection } from "@/components/landing/FaqSection";
+import { Hero } from "@/components/landing/Hero";
+import { PlansSection } from "@/components/landing/PlansSection";
+import { PromiseSection } from "@/components/landing/PromiseSection";
+import { SignatureSection } from "@/components/landing/SignatureSection";
+import { SiteFooter } from "@/components/landing/SiteFooter";
+import { SiteHeader } from "@/components/landing/SiteHeader";
+import { products } from "@/data/catalog";
+
+const TITLE = "PŪR LABS — Jabón perfumado de autor";
+const DESCRIPTION =
+  "Piezas translúcidas perfumadas inspiradas en la alta perfumería. Edición limitada, envío a todo México y promoción de apertura −50%.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <ScrollProgress />
+      <GrainOverlay />
+      <AnnouncementBar />
+      <SiteHeader />
+
+      <main className="relative overflow-hidden bg-[var(--black-deep)]">
+        <Hero />
+
+        <div id="fragrances">
+          {products.map((product) => (
+            <SignatureSection key={product.id} product={product} />
+          ))}
+        </div>
+
+        <ComparisonSection />
+        <PlansSection />
+        <PromiseSection />
+        <FaqSection />
+        <ConvertSection />
+      </main>
+
+      <SiteFooter />
+    </>
   );
 }
