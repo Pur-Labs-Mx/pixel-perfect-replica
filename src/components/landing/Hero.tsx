@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import heroPoster from "@/assets/hero-model.png";
 import { products } from "@/data/catalog";
 
-const hero = products[0];
+const hero = products[0]!;
 
 export function Hero() {
   return (
