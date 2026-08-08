@@ -194,7 +194,7 @@ export function PlansSection() {
               <PlanCard key={plan.id} plan={plan} />
             ))}
           </div>
-          <div className="mt-4 flex justify-center gap-2" role="tablist" aria-label="Planes disponibles">
+          <div className="mt-4 flex justify-center gap-2 md:hidden" role="tablist" aria-label="Planes disponibles">
             {plans.map((plan, index) => (
               <button
                 key={plan.id}
