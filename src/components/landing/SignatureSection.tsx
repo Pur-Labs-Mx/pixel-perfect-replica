@@ -189,7 +189,7 @@ export function SignatureSection({ product }: { product: Product }) {
                 {product.placeholder ? "Próximamente" : "Comprar ahora"}
               </BuyButton>
               <Link
-                to={`/${product.slug}`}
+                to={`/${product.slug}` as string as never}
                 className="font-body text-[11px] tracking-[0.28em] uppercase text-white/70 underline-offset-4 hover:text-white hover:underline sm:self-center"
               >
                 Ver la ficha →
