@@ -10,33 +10,206 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BacarougeRouteImport } from './routes/bacarouge'
+import { Route as CarritoRouteImport } from './routes/carrito'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as DevolucionesRouteImport } from './routes/devoluciones'
+import { Route as EnviosRouteImport } from './routes/envios'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ImaginaRouteImport } from './routes/imagina'
+import { Route as PacificChillRouteImport } from './routes/pacific-chill'
+import { Route as Producto04RouteImport } from './routes/producto-04'
+import { Route as Producto05RouteImport } from './routes/producto-05'
+import { Route as Producto06RouteImport } from './routes/producto-06'
+import { Route as RastreaTuPedidoRouteImport } from './routes/rastrea-tu-pedido'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BacarougeRoute = BacarougeRouteImport.update({
+  id: '/bacarouge',
+  path: '/bacarouge',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CarritoRoute = CarritoRouteImport.update({
+  id: '/carrito',
+  path: '/carrito',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DevolucionesRoute = DevolucionesRouteImport.update({
+  id: '/devoluciones',
+  path: '/devoluciones',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnviosRoute = EnviosRouteImport.update({
+  id: '/envios',
+  path: '/envios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImaginaRoute = ImaginaRouteImport.update({
+  id: '/imagina',
+  path: '/imagina',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PacificChillRoute = PacificChillRouteImport.update({
+  id: '/pacific-chill',
+  path: '/pacific-chill',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Producto04Route = Producto04RouteImport.update({
+  id: '/producto-04',
+  path: '/producto-04',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Producto05Route = Producto05RouteImport.update({
+  id: '/producto-05',
+  path: '/producto-05',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Producto06Route = Producto06RouteImport.update({
+  id: '/producto-06',
+  path: '/producto-06',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RastreaTuPedidoRoute = RastreaTuPedidoRouteImport.update({
+  id: '/rastrea-tu-pedido',
+  path: '/rastrea-tu-pedido',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bacarouge': typeof BacarougeRoute
+  '/carrito': typeof CarritoRoute
+  '/checkout': typeof CheckoutRoute
+  '/contacto': typeof ContactoRoute
+  '/devoluciones': typeof DevolucionesRoute
+  '/envios': typeof EnviosRoute
+  '/faq': typeof FaqRoute
+  '/imagina': typeof ImaginaRoute
+  '/pacific-chill': typeof PacificChillRoute
+  '/producto-04': typeof Producto04Route
+  '/producto-05': typeof Producto05Route
+  '/producto-06': typeof Producto06Route
+  '/rastrea-tu-pedido': typeof RastreaTuPedidoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bacarouge': typeof BacarougeRoute
+  '/carrito': typeof CarritoRoute
+  '/checkout': typeof CheckoutRoute
+  '/contacto': typeof ContactoRoute
+  '/devoluciones': typeof DevolucionesRoute
+  '/envios': typeof EnviosRoute
+  '/faq': typeof FaqRoute
+  '/imagina': typeof ImaginaRoute
+  '/pacific-chill': typeof PacificChillRoute
+  '/producto-04': typeof Producto04Route
+  '/producto-05': typeof Producto05Route
+  '/producto-06': typeof Producto06Route
+  '/rastrea-tu-pedido': typeof RastreaTuPedidoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bacarouge': typeof BacarougeRoute
+  '/carrito': typeof CarritoRoute
+  '/checkout': typeof CheckoutRoute
+  '/contacto': typeof ContactoRoute
+  '/devoluciones': typeof DevolucionesRoute
+  '/envios': typeof EnviosRoute
+  '/faq': typeof FaqRoute
+  '/imagina': typeof ImaginaRoute
+  '/pacific-chill': typeof PacificChillRoute
+  '/producto-04': typeof Producto04Route
+  '/producto-05': typeof Producto05Route
+  '/producto-06': typeof Producto06Route
+  '/rastrea-tu-pedido': typeof RastreaTuPedidoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/bacarouge'
+    | '/carrito'
+    | '/checkout'
+    | '/contacto'
+    | '/devoluciones'
+    | '/envios'
+    | '/faq'
+    | '/imagina'
+    | '/pacific-chill'
+    | '/producto-04'
+    | '/producto-05'
+    | '/producto-06'
+    | '/rastrea-tu-pedido'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/bacarouge'
+    | '/carrito'
+    | '/checkout'
+    | '/contacto'
+    | '/devoluciones'
+    | '/envios'
+    | '/faq'
+    | '/imagina'
+    | '/pacific-chill'
+    | '/producto-04'
+    | '/producto-05'
+    | '/producto-06'
+    | '/rastrea-tu-pedido'
+  id:
+    | '__root__'
+    | '/'
+    | '/bacarouge'
+    | '/carrito'
+    | '/checkout'
+    | '/contacto'
+    | '/devoluciones'
+    | '/envios'
+    | '/faq'
+    | '/imagina'
+    | '/pacific-chill'
+    | '/producto-04'
+    | '/producto-05'
+    | '/producto-06'
+    | '/rastrea-tu-pedido'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BacarougeRoute: typeof BacarougeRoute
+  CarritoRoute: typeof CarritoRoute
+  CheckoutRoute: typeof CheckoutRoute
+  ContactoRoute: typeof ContactoRoute
+  DevolucionesRoute: typeof DevolucionesRoute
+  EnviosRoute: typeof EnviosRoute
+  FaqRoute: typeof FaqRoute
+  ImaginaRoute: typeof ImaginaRoute
+  PacificChillRoute: typeof PacificChillRoute
+  Producto04Route: typeof Producto04Route
+  Producto05Route: typeof Producto05Route
+  Producto06Route: typeof Producto06Route
+  RastreaTuPedidoRoute: typeof RastreaTuPedidoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +221,115 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bacarouge': {
+      id: '/bacarouge'
+      path: '/bacarouge'
+      fullPath: '/bacarouge'
+      preLoaderRoute: typeof BacarougeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/carrito': {
+      id: '/carrito'
+      path: '/carrito'
+      fullPath: '/carrito'
+      preLoaderRoute: typeof CarritoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/devoluciones': {
+      id: '/devoluciones'
+      path: '/devoluciones'
+      fullPath: '/devoluciones'
+      preLoaderRoute: typeof DevolucionesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/envios': {
+      id: '/envios'
+      path: '/envios'
+      fullPath: '/envios'
+      preLoaderRoute: typeof EnviosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/imagina': {
+      id: '/imagina'
+      path: '/imagina'
+      fullPath: '/imagina'
+      preLoaderRoute: typeof ImaginaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pacific-chill': {
+      id: '/pacific-chill'
+      path: '/pacific-chill'
+      fullPath: '/pacific-chill'
+      preLoaderRoute: typeof PacificChillRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producto-04': {
+      id: '/producto-04'
+      path: '/producto-04'
+      fullPath: '/producto-04'
+      preLoaderRoute: typeof Producto04RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producto-05': {
+      id: '/producto-05'
+      path: '/producto-05'
+      fullPath: '/producto-05'
+      preLoaderRoute: typeof Producto05RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producto-06': {
+      id: '/producto-06'
+      path: '/producto-06'
+      fullPath: '/producto-06'
+      preLoaderRoute: typeof Producto06RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rastrea-tu-pedido': {
+      id: '/rastrea-tu-pedido'
+      path: '/rastrea-tu-pedido'
+      fullPath: '/rastrea-tu-pedido'
+      preLoaderRoute: typeof RastreaTuPedidoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BacarougeRoute: BacarougeRoute,
+  CarritoRoute: CarritoRoute,
+  CheckoutRoute: CheckoutRoute,
+  ContactoRoute: ContactoRoute,
+  DevolucionesRoute: DevolucionesRoute,
+  EnviosRoute: EnviosRoute,
+  FaqRoute: FaqRoute,
+  ImaginaRoute: ImaginaRoute,
+  PacificChillRoute: PacificChillRoute,
+  Producto04Route: Producto04Route,
+  Producto05Route: Producto05Route,
+  Producto06Route: Producto06Route,
+  RastreaTuPedidoRoute: RastreaTuPedidoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

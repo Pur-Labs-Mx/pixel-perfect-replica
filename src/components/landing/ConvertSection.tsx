@@ -1,3 +1,4 @@
+import { BuyButton } from "@/components/ui/BuyButton";
 import purLogoWhite from "@/assets/pur-logo-white.png";
 
 export function ConvertSection() {
@@ -51,20 +52,9 @@ export function ConvertSection() {
           <p>Elige la presencia que quieres dejar.</p>
         </div>
         <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+          <BuyButton href="#suscripciones">Encontrar mi fragancia</BuyButton>
           <a
-            className="cta-shine group relative inline-flex items-center justify-center gap-3 rounded-full px-6 sm:px-8 min-h-[52px] font-body font-bold uppercase whitespace-nowrap text-[12px] sm:text-[13px] tracking-[0.16em] sm:tracking-[0.18em] shadow-[0_1px_0_rgba(0,0,0,0.04)] transition-[background-color,transform,box-shadow,border-color,color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--tiffany-active)] disabled:opacity-60 disabled:pointer-events-none bg-[var(--tiffany)] text-[#050505] hover:-translate-y-[2px] hover:bg-[var(--tiffany-hover)] hover:shadow-[0_14px_30px_-14px_var(--tiffany-glow)] active:translate-y-0 active:bg-[var(--tiffany-active)]"
-            href="#suscripciones"
-          >
-            <span>Encontrar mi fragancia</span>
-            <span
-              aria-hidden="true"
-              className="inline-block translate-x-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[3px] group-hover:-translate-y-[3px]"
-            >
-              ↗
-            </span>
-          </a>
-          <a
-            href="#suscripciones"
+            href="#fragrances"
             className="inline-flex min-h-[52px] items-center justify-center rounded-full border border-white/45 px-8 font-body text-[13px] font-bold tracking-[0.18em] uppercase text-[var(--white-soft)] transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
           >
             Ver la colección

@@ -70,22 +70,22 @@ export function SiteFooter() {
           <p className="font-body text-[10px] tracking-[0.32em] uppercase text-[var(--gray-muted)]">Colección</p>
           <ul className="mt-6 space-y-3 font-body text-[15px] text-[var(--white-soft)]/85">
             <li>
-              <a href="#imagina" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <a href="/imagina" className="inline-block min-h-[44px] py-1 hover:text-white">
                 IMAGINA
               </a>
             </li>
             <li>
-              <a href="#bacarouge" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <a href="/bacarouge" className="inline-block min-h-[44px] py-1 hover:text-white">
                 BACAROUGE
               </a>
             </li>
             <li>
-              <a href="#pacific-chill" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <a href="/pacific-chill" className="inline-block min-h-[44px] py-1 hover:text-white">
                 PACIFIC CHILL
               </a>
             </li>
             <li>
-              <a href="#suscripciones" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <a href="/#suscripciones" className="inline-block min-h-[44px] py-1 hover:text-white">
                 Comprar
               </a>
             </li>
@@ -95,27 +95,27 @@ export function SiteFooter() {
           <p className="font-body text-[10px] tracking-[0.32em] uppercase text-[var(--gray-muted)]">Ayuda</p>
           <ul className="mt-6 space-y-3 font-body text-[15px] text-[var(--white-soft)]/85">
             <li>
-              <a href="#" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <a href="/faq" className="inline-block min-h-[44px] py-1 hover:text-white">
                 Preguntas Frecuentes
               </a>
             </li>
             <li>
-              <a href="#" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <a href="/rastrea-tu-pedido" className="inline-block min-h-[44px] py-1 hover:text-white">
                 Rastrea tu Pedido
               </a>
             </li>
             <li>
-              <a href="#" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <a href="/envios" className="inline-block min-h-[44px] py-1 hover:text-white">
                 Política de Envío
               </a>
             </li>
             <li>
-              <a href="#" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <a href="/devoluciones" className="inline-block min-h-[44px] py-1 hover:text-white">
                 Política de Devolución
               </a>
             </li>
             <li>
-              <a href="#" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <a href="/contacto" className="inline-block min-h-[44px] py-1 hover:text-white">
                 Contacto
               </a>
             </li>
@@ -131,12 +131,12 @@ export function SiteFooter() {
           <p className="font-body text-[10px] tracking-[0.32em] uppercase text-[var(--gray-muted)]">Casa</p>
           <ul className="mt-6 space-y-3 font-body text-[15px] text-[var(--white-soft)]/85">
             <li>
-              <a href="#story" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <a href="/#promise" className="inline-block min-h-[44px] py-1 hover:text-white">
                 La marca
               </a>
             </li>
             <li>
-              <a href="#selector" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <a href="/#suscripciones" className="inline-block min-h-[44px] py-1 hover:text-white">
                 Encontrar mi fragancia
               </a>
             </li>
@@ -179,11 +179,11 @@ export function SiteFooter() {
         <div className="mt-6 flex flex-wrap items-center justify-between gap-3 font-body text-[10px] tracking-[0.28em] uppercase text-[var(--gray-muted)]">
           <span>© 2026 PŪR LABS · México</span>
           <span>
-            <a href="#" className="hover:text-white">
+            <a href="/devoluciones" className="hover:text-white">
               Privacidad
             </a>
             <span className="mx-3 text-white/25">·</span>
-            <a href="#" className="hover:text-white">
+            <a href="/envios" className="hover:text-white">
               Términos
             </a>
           </span>

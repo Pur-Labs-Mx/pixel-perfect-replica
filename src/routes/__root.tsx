@@ -11,6 +11,13 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { CartProvider } from "@/lib/cart";
+import { LoadingScreen } from "@/components/landing/LoadingScreen";
+import { PersistentBuyCta } from "@/components/landing/PersistentBuyCta";
+import { AmbientAudio } from "@/components/conversion/AmbientAudio";
+import { SocialProofDemo } from "@/components/conversion/SocialProofDemo";
+import { NewsletterPopup } from "@/components/conversion/NewsletterPopup";
+import { ExitIntentPopup } from "@/components/conversion/ExitIntentPopup";
 
 function NotFoundComponent() {
   return (
@@ -100,7 +107,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <head>
         <HeadContent />
       </head>
@@ -117,8 +124,17 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <CartProvider>
+        <LoadingScreen />
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+        <PersistentBuyCta />
+        <AmbientAudio />
+        <SocialProofDemo />
+        <NewsletterPopup />
+        <ExitIntentPopup />
+      </CartProvider>
     </QueryClientProvider>
   );
 }
+

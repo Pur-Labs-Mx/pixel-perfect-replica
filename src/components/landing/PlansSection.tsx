@@ -1,9 +1,14 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import { Check, ChevronLeft, ChevronRight, Truck } from "lucide-react";
-import { plans, products, type Plan } from "@/data/catalog";
+import { plans, availableProducts, type Plan } from "@/data/catalog";
+import { BuyButton } from "@/components/ui/BuyButton";
+import { useCart } from "@/lib/cart";
 
 function PlanCard({ plan }: { plan: Plan }) {
   const [selected, setSelected] = useState<string[]>([]);
+  const { add } = useCart();
+  const navigate = useNavigate();
 
   const toggle = (name: string) => {
     setSelected((prev) => {
@@ -13,7 +18,26 @@ function PlanCard({ plan }: { plan: Plan }) {
     });
   };
 
+  const complete = selected.length === plan.pieces;
+
+  const addToCart = () => {
+    if (!complete) return;
+    const first = availableProducts.find((p) => p.name === selected[0]);
+    add({
+      productId: plan.id === "single" ? (first?.id ?? plan.id) : plan.id,
+      name: plan.id === "single" ? (first?.name ?? plan.title) : plan.title,
+      slug: plan.id === "single" ? (first?.slug ?? "") : "",
+      image: first?.soapImage ?? "",
+      variant: plan.title,
+      fragrances: selected,
+      unitPrice: plan.price,
+    });
+    setSelected([]);
+    void navigate({ to: "/carrito" });
+  };
+
   const featured = plan.featured;
+
 
   return (
     <article
@@ -97,7 +121,7 @@ function PlanCard({ plan }: { plan: Plan }) {
           </span>
         </p>
         <div className="mt-2 flex flex-wrap gap-1.5">
-          {products.map((product) => {
+          {availableProducts.map((product) => {
             const isSelected = selected.includes(product.name);
             return (
               <button
@@ -117,20 +141,14 @@ function PlanCard({ plan }: { plan: Plan }) {
           })}
         </div>
       </div>
-      <div className="mt-4">
-        <a
-          className="cta-shine group relative inline-flex items-center justify-center gap-3 rounded-full px-6 sm:px-8 min-h-[52px] font-body font-bold uppercase whitespace-nowrap text-[12px] sm:text-[13px] tracking-[0.16em] sm:tracking-[0.18em] shadow-[0_1px_0_rgba(0,0,0,0.04)] transition-[background-color,transform,box-shadow,border-color,color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--tiffany-active)] disabled:opacity-60 disabled:pointer-events-none bg-[var(--tiffany)] text-[#050505] hover:-translate-y-[2px] hover:bg-[var(--tiffany-hover)] hover:shadow-[0_14px_30px_-14px_var(--tiffany-glow)] active:translate-y-0 active:bg-[var(--tiffany-active)] w-full"
-          href="#convert"
-        >
-          <span>Elige tus fragancias</span>
-          <span
-            aria-hidden="true"
-            className="inline-block translate-x-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[3px] group-hover:-translate-y-[3px]"
-          >
-            ↗
-          </span>
-        </a>
+      <div className="mt-auto pt-4">
+        <BuyButton onClick={addToCart} disabled={!complete} fullWidth>
+          {complete
+            ? "Añadir al carrito"
+            : `Elige ${plan.pieces - selected.length} fragancia${plan.pieces - selected.length === 1 ? "" : "s"}`}
+        </BuyButton>
       </div>
+
     </article>
   );
 }
