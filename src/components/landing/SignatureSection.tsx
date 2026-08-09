@@ -14,10 +14,6 @@ export function SignatureSection({ product }: { product: Product }) {
     ["--sig-color" as string]: c,
   } as CSSProperties;
 
-  const ctaClass = isHot
-    ? "cta-shine group relative inline-flex items-center justify-center gap-3 rounded-full px-6 sm:px-8 min-h-[52px] font-body font-bold uppercase whitespace-nowrap text-[12px] sm:text-[13px] tracking-[0.16em] sm:tracking-[0.18em] shadow-[0_1px_0_rgba(0,0,0,0.04)] transition-[background-color,transform,box-shadow,border-color,color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--tiffany-active)] disabled:opacity-60 disabled:pointer-events-none bg-[var(--tiffany)] text-[#050505] hover:-translate-y-[2px] hover:bg-[var(--tiffany-hover)] hover:shadow-[0_14px_30px_-14px_var(--tiffany-glow)] active:translate-y-0 active:bg-[var(--tiffany-active)] w-full sm:w-auto"
-    : "cta-shine group relative inline-flex items-center justify-center gap-3 rounded-full px-6 sm:px-8 min-h-[52px] font-body font-bold uppercase whitespace-nowrap text-[12px] sm:text-[13px] tracking-[0.16em] sm:tracking-[0.18em] shadow-[0_1px_0_rgba(0,0,0,0.04)] transition-[background-color,transform,box-shadow,border-color,color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--tiffany-active)] disabled:opacity-60 disabled:pointer-events-none bg-[var(--black-deep)] text-[var(--warm-white)] border border-[var(--tiffany)] hover:-translate-y-[2px] hover:bg-[var(--tiffany)] hover:text-[var(--black-deep)] hover:shadow-[0_14px_30px_-14px_var(--tiffany-glow)] active:translate-y-0 active:bg-[var(--tiffany-active)] active:text-[var(--black-deep)] w-full sm:w-auto";
-
   const soapPositionClass = reversed
     ? "pointer-events-none absolute z-20 hidden md:block right-[6%] top-1/2 -translate-y-1/2"
     : "pointer-events-none absolute z-20 hidden md:block right-[6%] bottom-[6%]";
@@ -45,7 +41,7 @@ export function SignatureSection({ product }: { product: Product }) {
         </p>
       </div>
       <div className="pointer-events-none absolute left-6 top-10 z-10 font-body text-[10px] tracking-[0.4em] uppercase text-white/40 sm:left-10">
-        № {product.number} / 03
+        № {product.number} / {String(products.length).padStart(2, "0")}
       </div>
       <div
         className={`relative mx-auto grid max-w-[1500px] items-center gap-y-12 gap-x-0 px-0 py-20 md:gap-y-0 md:py-28 ${
@@ -143,10 +139,16 @@ export function SignatureSection({ product }: { product: Product }) {
                   Hot
                 </span>
               )}
-              <span className="inline-flex items-center font-body text-[10px] tracking-[0.16em] uppercase whitespace-nowrap text-white/70">
-                <span className="tabular-nums font-semibold">{product.stock}</span>
-                <span className="ml-1">disponibles</span>
-              </span>
+              {product.placeholder ? (
+                <span className="inline-flex items-center rounded-full border border-white/25 px-2 py-[3px] font-body text-[9px] font-bold tracking-[0.24em] uppercase whitespace-nowrap text-white/60">
+                  Próximamente · datos pendientes
+                </span>
+              ) : (
+                <span className="inline-flex items-center font-body text-[10px] tracking-[0.16em] uppercase whitespace-nowrap text-white/70">
+                  <span className="tabular-nums font-semibold">{product.stock}</span>
+                  <span className="ml-1">disponibles</span>
+                </span>
+              )}
             </div>
           </div>
           <p className="mt-6 font-heading text-base italic lowercase text-white/55">{product.family}</p>
