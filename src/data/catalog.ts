@@ -1,8 +1,8 @@
 /**
  * Catálogo PŪR LABS.
  *
- * Fuente única de datos de la landing. Cuando se conecte el carrito y los pagos,
- * basta con reemplazar estos objetos por datos del backend manteniendo la forma.
+ * Fuente única de datos de la tienda. Cuando se conecte el backend,
+ * basta con reemplazar estos objetos manteniendo la forma.
  */
 
 import imaginaBg from "@/assets/imagina-bg.webp";
@@ -11,6 +11,8 @@ import bacarougeBg from "@/assets/bacarouge-bg.webp";
 import bacarougeSoap from "@/assets/bacarouge-soap.webp";
 import pacificBg from "@/assets/pacific-bg.webp";
 import pacificSoap from "@/assets/pacific-soap.webp";
+import placeholderBg from "@/assets/placeholder-bg.jpg";
+import placeholderSoap from "@/assets/placeholder-soap.png";
 
 export type Product = {
   id: string;
@@ -31,10 +33,46 @@ export type Product = {
   glowColor: string;
   bgImage: string;
   soapImage: string;
+  /** Espacio preparado: los datos definitivos llegarán después. */
+  placeholder?: boolean;
+  /** Storytelling para la ficha individual. */
+  story?: string;
+  features?: string[];
 };
 
 export const CURRENCY = "MXN";
 export const PROMO_LABEL = "Promoción de apertura";
+export const PIECE_WEIGHT = "180 g";
+
+const PENDING = "[PENDIENTE: información oficial]";
+
+const placeholderProduct = (n: number, color: string, glow: string): Product => ({
+  id: `producto-0${n}`,
+  slug: `producto-0${n}`,
+  number: `0${n}`,
+  name: `PRODUCTO 0${n}`,
+  displayName: [`PRODUCTO 0${n}`],
+  family: "[PENDIENTE: familia olfativa]",
+  price: 399,
+  compareAtPrice: 800,
+  discountPercent: 50,
+  stock: 0,
+  hot: false,
+  claim: "[PENDIENTE: claim de la fragancia]",
+  description: `${PENDING} Este espacio ya está preparado con el mismo sistema visual: al recibir foto, nombre, descripción y precio se integra automáticamente.`,
+  notes: [
+    { label: "Primera impresión", value: PENDING },
+    { label: "El corazón", value: PENDING },
+    { label: "La estela", value: PENDING },
+  ],
+  signatureColor: color,
+  glowColor: glow,
+  bgImage: placeholderBg,
+  soapImage: placeholderSoap,
+  placeholder: true,
+  story: PENDING,
+  features: [`Pieza sólida de ${PIECE_WEIGHT}`, PENDING, PENDING],
+});
 
 export const products: Product[] = [
   {
@@ -61,6 +99,13 @@ export const products: Product[] = [
     glowColor: "#8fe9ff",
     bgImage: imaginaBg,
     soapImage: imaginaSoap,
+    story:
+      "Nace del momento exacto en que una idea aparece: cítricos que abren la mente, té negro que la sostiene y un ámbar que la deja resonando en la piel.",
+    features: [
+      `Pieza sólida de ${PIECE_WEIGHT}`,
+      "Glicerina vegetal translúcida",
+      "Curado de cuatro semanas",
+    ],
   },
   {
     id: "bacarouge",
@@ -85,6 +130,13 @@ export const products: Product[] = [
     glowColor: "#ff9b9b",
     bgImage: bacarougeBg,
     soapImage: bacarougeSoap,
+    story:
+      "Un rojo que no grita. Azafrán y jazmín sobre un ámbar mineral que se queda cerca de la piel, como una presencia que se recuerda después.",
+    features: [
+      `Pieza sólida de ${PIECE_WEIGHT}`,
+      "Glicerina vegetal translúcida",
+      "Curado de cuatro semanas",
+    ],
   },
   {
     id: "pacific-chill",
@@ -110,8 +162,22 @@ export const products: Product[] = [
     glowColor: "#d9fff7",
     bgImage: pacificBg,
     soapImage: pacificSoap,
+    story:
+      "Agua fría, fruta recién cortada y un verde limpio: la sensación de empezar otra vez, cada mañana, sin peso.",
+    features: [
+      `Pieza sólida de ${PIECE_WEIGHT}`,
+      "Glicerina vegetal translúcida",
+      "Curado de cuatro semanas",
+    ],
   },
+  placeholderProduct(4, "#8A8F98", "#dfe4ea"),
+  placeholderProduct(5, "#7E8B7A", "#dfe9dc"),
+  placeholderProduct(6, "#8B8074", "#e9e1d7"),
 ];
+
+export const availableProducts = products.filter((p) => !p.placeholder);
+
+export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
 
 export type Plan = {
   id: string;
@@ -135,7 +201,7 @@ export const plans: Plan[] = [
     eyebrow: "Compra única · 1 pieza",
     title: "Una pieza",
     price: 399,
-    perks: ["Envío no incluido", "1 jabón · 120 g"],
+    perks: ["Envío no incluido", `1 jabón · ${PIECE_WEIGHT}`],
     pieces: 1,
     priceHint: "Precio por pieza",
     subHint: "Punto de partida",
@@ -148,7 +214,7 @@ export const plans: Plan[] = [
     pricePerPiece: 325,
     compareAtPerPiece: 399,
     savingLabel: "Ahorras $148 MXN · 19%",
-    perks: ["Envío gratis incluido", "2 jabones · 120 g", "No se renueva automáticamente"],
+    perks: ["Envío gratis incluido", `2 jabones · ${PIECE_WEIGHT}`, "No se renueva automáticamente"],
     pieces: 2,
     priceHint: "pago único",
   },
@@ -160,7 +226,7 @@ export const plans: Plan[] = [
     pricePerPiece: 283,
     compareAtPerPiece: 399,
     savingLabel: "Ahorras $347 MXN · 29%",
-    perks: ["Envío gratis incluido", "3 jabones · 120 g", "No se renueva automáticamente"],
+    perks: ["Envío gratis incluido", `3 jabones · ${PIECE_WEIGHT}`, "No se renueva automáticamente"],
     pieces: 3,
     featured: true,
     badge: "Mejor valor",
@@ -168,10 +234,12 @@ export const plans: Plan[] = [
   },
 ];
 
+export const getPlan = (id: string) => plans.find((p) => p.id === id);
+
 export const comparisonRows: { feature: string; pur: boolean; common: boolean }[] = [
   { feature: "Aroma inspirado en alta perfumería", pur: true, common: false },
   { feature: "Acabado translúcido de glicerina vegetal", pur: true, common: false },
-  { feature: "Pieza sólida de 120 g", pur: true, common: true },
+  { feature: `Pieza sólida de ${PIECE_WEIGHT}`, pur: true, common: true },
   { feature: "Diseño de autor listo para regalo", pur: true, common: false },
   { feature: "Fórmula suave, sin sulfatos agresivos", pur: true, common: false },
   { feature: "Estela perceptible después del baño", pur: true, common: false },
@@ -181,7 +249,7 @@ export const faqs: { question: string; answer: string }[] = [
   {
     question: "¿Cuánto pesa cada pieza?",
     answer:
-      "120 g. Cada jabón se cura durante cuatro semanas para estabilizar su fragancia antes de salir del taller.",
+      "180 g. Cada jabón se cura durante cuatro semanas para estabilizar su fragancia antes de salir del taller.",
   },
   {
     question: "¿A dónde envían?",
