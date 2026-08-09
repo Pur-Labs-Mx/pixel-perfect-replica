@@ -23,7 +23,7 @@ function ContactoPage() {
     email: "",
     mensaje: "",
   });
-  const [errors, setErrors] = useState<Record<string, boolean>>({});
+  const [errors, setErrors] = useState<{ nombre?: boolean; email?: boolean; mensaje?: boolean }>({});
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: FormEvent) => {
