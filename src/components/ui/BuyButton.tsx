@@ -14,31 +14,24 @@ export const BUY_BUTTON_CLASS =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--tiffany-active)] focus-visible:ring-offset-[var(--black-deep)] " +
   "disabled:opacity-60 disabled:pointer-events-none";
 
-type Common = {
+type Props = {
   children: ReactNode;
   fullWidth?: boolean;
   className?: string;
   arrow?: boolean;
   "aria-label"?: string;
+  to?: string;
+  params?: Record<string, string>;
+  href?: string;
+  onClick?: () => void;
+  type?: "button" | "submit";
+  disabled?: boolean;
 };
-
-type Props = Common &
-  (
-    | { to: string; params?: Record<string, string>; onClick?: () => void; href?: never; type?: never }
-    | { href: string; to?: never; params?: never; onClick?: () => void; type?: never }
-    | {
-        onClick: () => void;
-        to?: never;
-        href?: never;
-        params?: never;
-        type?: "button" | "submit";
-        disabled?: boolean;
-      }
-  );
 
 export function BuyButton(props: Props) {
   const { children, fullWidth, className = "", arrow = true } = props;
   const cls = `${BUY_BUTTON_CLASS} ${fullWidth ? "w-full" : ""} ${className}`;
+
 
   const inner = (
     <>
