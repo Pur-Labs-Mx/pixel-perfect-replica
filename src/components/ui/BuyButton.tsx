@@ -16,17 +16,18 @@ export const BUY_BUTTON_CLASS =
 
 type Props = {
   children: ReactNode;
-  fullWidth?: boolean;
-  className?: string;
-  arrow?: boolean;
-  "aria-label"?: string;
-  to?: string;
-  params?: Record<string, string>;
-  href?: string;
-  onClick?: () => void;
-  type?: "button" | "submit";
-  disabled?: boolean;
+  fullWidth?: boolean | undefined;
+  className?: string | undefined;
+  arrow?: boolean | undefined;
+  "aria-label"?: string | undefined;
+  to?: string | undefined;
+  params?: Record<string, string> | undefined;
+  href?: string | undefined;
+  onClick?: (() => void) | undefined;
+  type?: "button" | "submit" | undefined;
+  disabled?: boolean | undefined;
 };
+
 
 export function BuyButton(props: Props) {
   const { children, fullWidth, className = "", arrow = true } = props;

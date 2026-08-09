@@ -107,7 +107,7 @@ export function AmbientAudio() {
       onClick={handleToggle}
       aria-label={muted ? "Activar audio ambiental" : "Silenciar audio ambiental"}
       aria-pressed={!muted}
-      className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-4 z-[75] flex h-11 w-11 items-center justify-center rounded-full border-[1.5px] border-[var(--tiffany-border)] bg-[var(--black-deep)]/90 text-[var(--white-soft)] shadow-[0_14px_30px_-14px_rgba(0,0,0,0.9)] backdrop-blur transition-colors duration-300 hover:border-[var(--tiffany)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--tiffany-active)] sm:bottom-8"
+      className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-4 z-[75] flex h-11 w-11 items-center justify-center rounded-full border-[1.5px] border-[var(--tiffany-border)] bg-[var(--black-deep)]/90 text-[var(--white-soft)] shadow-[0_14px_30px_-14px_rgba(0,0,0,0.9)] backdrop-blur transition-colors duration-300 hover:border-[var(--tiffany)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--tiffany-active)] sm:bottom-24"
     >
       <span aria-hidden="true" className="text-base">
         {muted ? "🔇" : "🔊"}
