@@ -29,9 +29,9 @@ function ContactoPage() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const nextErrors: Record<string, boolean> = {};
-    if (!values['nombre'].trim()) nextErrors.nombre = true;
-    if (!values['email'].trim()) nextErrors.email = true;
-    if (!values['mensaje'].trim()) nextErrors.mensaje = true;
+    if (!values['nombre'].trim()) nextErrors['nombre'] = true;
+    if (!values['email'].trim()) nextErrors['email'] = true;
+    if (!values['mensaje'].trim()) nextErrors['mensaje'] = true;
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
     setSubmitted(true);
