@@ -174,23 +174,23 @@ export function SignatureSection({ product }: { product: Product }) {
                 Promoción de apertura
               </span>
             </div>
-            <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-4">
-              <button type="button" className={ctaClass} aria-label={`Comprar ${product.name} ahora`}>
-                <span>Comprar ahora</span>
-                <span
-                  aria-hidden="true"
-                  className="inline-block translate-x-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[3px] group-hover:-translate-y-[3px]"
-                >
-                  ↗
-                </span>
-              </button>
-              <a
-                href={`#${product.slug}`}
+            <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
+              <BuyButton
+                to={`/${product.slug}`}
+                fullWidth
+                className="sm:w-auto"
+                aria-label={`Comprar ${product.name}`}
+              >
+                {product.placeholder ? "Próximamente" : "Comprar ahora"}
+              </BuyButton>
+              <Link
+                to={`/${product.slug}`}
                 className="font-body text-[11px] tracking-[0.28em] uppercase text-white/70 underline-offset-4 hover:text-white hover:underline sm:self-center"
               >
                 Ver la ficha →
-              </a>
+              </Link>
             </div>
+
           </div>
           <p className="mt-12 font-heading text-2xl italic leading-tight text-white sm:text-3xl">{product.claim}</p>
           <p className="mt-6 max-w-xl font-body text-[15px] leading-relaxed text-white/70">{product.description}</p>
