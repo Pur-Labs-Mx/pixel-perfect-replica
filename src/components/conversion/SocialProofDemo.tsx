@@ -42,7 +42,9 @@ export function SocialProofDemo() {
 
   const product = realProducts[index % realProducts.length];
   const city = FAKE_CITIES[index % FAKE_CITIES.length];
+  if (!product) return null;
   const name = product.displayName.join(" ");
+
 
   return (
     <div
