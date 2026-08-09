@@ -1,5 +1,8 @@
 import type { CSSProperties } from "react";
-import type { Product } from "@/data/catalog";
+import { Link } from "@tanstack/react-router";
+
+import { BuyButton } from "@/components/ui/BuyButton";
+import { products, type Product } from "@/data/catalog";
 
 export function SignatureSection({ product }: { product: Product }) {
   const reversed = parseInt(product.number, 10) % 2 === 0;
