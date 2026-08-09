@@ -10,11 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BacarougeRouteImport } from './routes/bacarouge'
 import { Route as CarritoRouteImport } from './routes/carrito'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as ImaginaRouteImport } from './routes/imagina'
+import { Route as PacificChillRouteImport } from './routes/pacific-chill'
+import { Route as Producto04RouteImport } from './routes/producto-04'
+import { Route as Producto05RouteImport } from './routes/producto-05'
+import { Route as Producto06RouteImport } from './routes/producto-06'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BacarougeRoute = BacarougeRouteImport.update({
+  id: '/bacarouge',
+  path: '/bacarouge',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CarritoRoute = CarritoRouteImport.update({
@@ -22,31 +34,117 @@ const CarritoRoute = CarritoRouteImport.update({
   path: '/carrito',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImaginaRoute = ImaginaRouteImport.update({
+  id: '/imagina',
+  path: '/imagina',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PacificChillRoute = PacificChillRouteImport.update({
+  id: '/pacific-chill',
+  path: '/pacific-chill',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Producto04Route = Producto04RouteImport.update({
+  id: '/producto-04',
+  path: '/producto-04',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Producto05Route = Producto05RouteImport.update({
+  id: '/producto-05',
+  path: '/producto-05',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Producto06Route = Producto06RouteImport.update({
+  id: '/producto-06',
+  path: '/producto-06',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bacarouge': typeof BacarougeRoute
   '/carrito': typeof CarritoRoute
+  '/checkout': typeof CheckoutRoute
+  '/imagina': typeof ImaginaRoute
+  '/pacific-chill': typeof PacificChillRoute
+  '/producto-04': typeof Producto04Route
+  '/producto-05': typeof Producto05Route
+  '/producto-06': typeof Producto06Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bacarouge': typeof BacarougeRoute
   '/carrito': typeof CarritoRoute
+  '/checkout': typeof CheckoutRoute
+  '/imagina': typeof ImaginaRoute
+  '/pacific-chill': typeof PacificChillRoute
+  '/producto-04': typeof Producto04Route
+  '/producto-05': typeof Producto05Route
+  '/producto-06': typeof Producto06Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bacarouge': typeof BacarougeRoute
   '/carrito': typeof CarritoRoute
+  '/checkout': typeof CheckoutRoute
+  '/imagina': typeof ImaginaRoute
+  '/pacific-chill': typeof PacificChillRoute
+  '/producto-04': typeof Producto04Route
+  '/producto-05': typeof Producto05Route
+  '/producto-06': typeof Producto06Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/carrito'
+  fullPaths:
+    | '/'
+    | '/bacarouge'
+    | '/carrito'
+    | '/checkout'
+    | '/imagina'
+    | '/pacific-chill'
+    | '/producto-04'
+    | '/producto-05'
+    | '/producto-06'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/carrito'
-  id: '__root__' | '/' | '/carrito'
+  to:
+    | '/'
+    | '/bacarouge'
+    | '/carrito'
+    | '/checkout'
+    | '/imagina'
+    | '/pacific-chill'
+    | '/producto-04'
+    | '/producto-05'
+    | '/producto-06'
+  id:
+    | '__root__'
+    | '/'
+    | '/bacarouge'
+    | '/carrito'
+    | '/checkout'
+    | '/imagina'
+    | '/pacific-chill'
+    | '/producto-04'
+    | '/producto-05'
+    | '/producto-06'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BacarougeRoute: typeof BacarougeRoute
   CarritoRoute: typeof CarritoRoute
+  CheckoutRoute: typeof CheckoutRoute
+  ImaginaRoute: typeof ImaginaRoute
+  PacificChillRoute: typeof PacificChillRoute
+  Producto04Route: typeof Producto04Route
+  Producto05Route: typeof Producto05Route
+  Producto06Route: typeof Producto06Route
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +156,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bacarouge': {
+      id: '/bacarouge'
+      path: '/bacarouge'
+      fullPath: '/bacarouge'
+      preLoaderRoute: typeof BacarougeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/carrito': {
       id: '/carrito'
       path: '/carrito'
@@ -65,12 +170,61 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CarritoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/imagina': {
+      id: '/imagina'
+      path: '/imagina'
+      fullPath: '/imagina'
+      preLoaderRoute: typeof ImaginaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pacific-chill': {
+      id: '/pacific-chill'
+      path: '/pacific-chill'
+      fullPath: '/pacific-chill'
+      preLoaderRoute: typeof PacificChillRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producto-04': {
+      id: '/producto-04'
+      path: '/producto-04'
+      fullPath: '/producto-04'
+      preLoaderRoute: typeof Producto04RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producto-05': {
+      id: '/producto-05'
+      path: '/producto-05'
+      fullPath: '/producto-05'
+      preLoaderRoute: typeof Producto05RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producto-06': {
+      id: '/producto-06'
+      path: '/producto-06'
+      fullPath: '/producto-06'
+      preLoaderRoute: typeof Producto06RouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BacarougeRoute: BacarougeRoute,
   CarritoRoute: CarritoRoute,
+  CheckoutRoute: CheckoutRoute,
+  ImaginaRoute: ImaginaRoute,
+  PacificChillRoute: PacificChillRoute,
+  Producto04Route: Producto04Route,
+  Producto05Route: Producto05Route,
+  Producto06Route: Producto06Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

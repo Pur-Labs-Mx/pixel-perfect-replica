@@ -197,7 +197,7 @@ export function ProductPage({ product }: { product: Product }) {
               </div>
 
               <div className="flex flex-1 flex-col gap-3 sm:flex-row">
-                <BuyButton onClick={handleAdd} disabled={product.placeholder} fullWidth>
+                <BuyButton onClick={handleAdd} disabled={product.placeholder ?? false} fullWidth>
                   {added ? "Añadido ✓" : "Añadir al carrito"}
                 </BuyButton>
                 <BuyButton to="/carrito" fullWidth>
@@ -304,7 +304,7 @@ export function ProductPage({ product }: { product: Product }) {
               {product.name} te está esperando.
             </h2>
             <div className="mt-8 flex justify-center">
-              <BuyButton onClick={handleAdd} disabled={product.placeholder}>
+              <BuyButton onClick={handleAdd} disabled={product.placeholder ?? false}>
                 Añadir al carrito
               </BuyButton>
             </div>
