@@ -17,16 +17,10 @@ const DESCRIPTION =
   "Piezas translúcidas perfumadas inspiradas en la alta perfumería. Edición limitada, envío a todo México y promoción de apertura −50%.";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-    ],
-  }),
+  head: () => pageMeta({ title: TITLE, description: DESCRIPTION, path: "/" }),
   component: Index,
 });
+
 
 function Index() {
   return (
