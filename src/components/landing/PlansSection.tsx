@@ -141,20 +141,14 @@ function PlanCard({ plan }: { plan: Plan }) {
           })}
         </div>
       </div>
-      <div className="mt-4">
-        <a
-          className="cta-shine group relative inline-flex items-center justify-center gap-3 rounded-full px-6 sm:px-8 min-h-[52px] font-body font-bold uppercase whitespace-nowrap text-[12px] sm:text-[13px] tracking-[0.16em] sm:tracking-[0.18em] shadow-[0_1px_0_rgba(0,0,0,0.04)] transition-[background-color,transform,box-shadow,border-color,color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--tiffany-active)] disabled:opacity-60 disabled:pointer-events-none bg-[var(--tiffany)] text-[#050505] hover:-translate-y-[2px] hover:bg-[var(--tiffany-hover)] hover:shadow-[0_14px_30px_-14px_var(--tiffany-glow)] active:translate-y-0 active:bg-[var(--tiffany-active)] w-full"
-          href="#convert"
-        >
-          <span>Elige tus fragancias</span>
-          <span
-            aria-hidden="true"
-            className="inline-block translate-x-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[3px] group-hover:-translate-y-[3px]"
-          >
-            ↗
-          </span>
-        </a>
+      <div className="mt-auto pt-4">
+        <BuyButton onClick={addToCart} disabled={!complete} fullWidth>
+          {complete
+            ? "Añadir al carrito"
+            : `Elige ${plan.pieces - selected.length} fragancia${plan.pieces - selected.length === 1 ? "" : "s"}`}
+        </BuyButton>
       </div>
+
     </article>
   );
 }
