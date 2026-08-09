@@ -11,6 +11,7 @@ import { SignatureSection } from "@/components/landing/SignatureSection";
 import { SiteFooter } from "@/components/landing/SiteFooter";
 import { SiteHeader } from "@/components/landing/SiteHeader";
 import { products } from "@/data/catalog";
+import { pageMeta } from "@/lib/site";
 
 const TITLE = "PŪR LABS — Jabón perfumado de autor";
 const DESCRIPTION =
