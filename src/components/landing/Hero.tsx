@@ -1,5 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 
+import { BuyButton } from "@/components/ui/BuyButton";
+
 import heroPoster from "@/assets/hero-model.png";
 import { products } from "@/data/catalog";
 
@@ -79,22 +81,12 @@ export function Hero() {
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
-              <button
-                type="button"
-                aria-label="Comprar ahora"
-                className="cta-shine group relative inline-flex min-h-[52px] items-center justify-center gap-3 rounded-full bg-[var(--tiffany)] px-6 font-body text-[12px] font-bold tracking-[0.16em] uppercase whitespace-nowrap text-[#050505] shadow-[0_1px_0_rgba(0,0,0,0.04)] transition-[background-color,transform,box-shadow,border-color,color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-[2px] hover:bg-[var(--tiffany-hover)] hover:shadow-[0_14px_30px_-14px_var(--tiffany-glow)] focus-visible:ring-2 focus-visible:ring-[var(--tiffany-active)] focus-visible:ring-offset-2 focus-visible:outline-none active:translate-y-0 active:bg-[var(--tiffany-active)] sm:px-8 sm:text-[13px] sm:tracking-[0.18em]"
-              >
-                <span>Comprar ahora</span>
-                <span
-                  aria-hidden="true"
-                  className="inline-block translate-x-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-[3px] group-hover:translate-x-[3px]"
-                >
-                  ↗
-                </span>
-              </button>
+              <BuyButton href="#suscripciones" aria-label="Comprar ahora">
+                Comprar ahora
+              </BuyButton>
 
               <a
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--commerce)] px-8 py-4 font-body text-[12px] font-semibold tracking-[0.22em] uppercase text-[var(--commerce-ink)] transition-colors duration-200 hover:bg-[var(--commerce-hover)] focus-visible:ring-2 focus-visible:ring-[var(--commerce-active)] focus-visible:ring-offset-2 focus-visible:outline-none active:bg-[var(--commerce-active)]"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/45 px-8 py-4 font-body text-[12px] font-semibold tracking-[0.22em] uppercase text-[var(--white-soft)] transition-colors duration-200 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:outline-none"
                 href="#fragrances"
               >
                 <span>Ver la colección</span>
@@ -102,7 +94,7 @@ export function Hero() {
               </a>
 
               <a
-                href="#faq"
+                href="/faq"
                 className="font-body text-[11px] tracking-[0.28em] uppercase text-white/70 underline-offset-4 hover:text-white hover:underline"
               >
                 Preguntas frecuentes →
