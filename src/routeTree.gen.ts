@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BacarougeRouteImport } from './routes/bacarouge'
 import { Route as CarritoRouteImport } from './routes/carrito'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as DevolucionesRouteImport } from './routes/devoluciones'
+import { Route as EnviosRouteImport } from './routes/envios'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ImaginaRouteImport } from './routes/imagina'
 import { Route as PacificChillRouteImport } from './routes/pacific-chill'
@@ -39,6 +41,16 @@ const CarritoRoute = CarritoRouteImport.update({
 const CheckoutRoute = CheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DevolucionesRoute = DevolucionesRouteImport.update({
+  id: '/devoluciones',
+  path: '/devoluciones',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnviosRoute = EnviosRouteImport.update({
+  id: '/envios',
+  path: '/envios',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -82,6 +94,8 @@ export interface FileRoutesByFullPath {
   '/bacarouge': typeof BacarougeRoute
   '/carrito': typeof CarritoRoute
   '/checkout': typeof CheckoutRoute
+  '/devoluciones': typeof DevolucionesRoute
+  '/envios': typeof EnviosRoute
   '/faq': typeof FaqRoute
   '/imagina': typeof ImaginaRoute
   '/pacific-chill': typeof PacificChillRoute
@@ -95,6 +109,8 @@ export interface FileRoutesByTo {
   '/bacarouge': typeof BacarougeRoute
   '/carrito': typeof CarritoRoute
   '/checkout': typeof CheckoutRoute
+  '/devoluciones': typeof DevolucionesRoute
+  '/envios': typeof EnviosRoute
   '/faq': typeof FaqRoute
   '/imagina': typeof ImaginaRoute
   '/pacific-chill': typeof PacificChillRoute
@@ -109,6 +125,8 @@ export interface FileRoutesById {
   '/bacarouge': typeof BacarougeRoute
   '/carrito': typeof CarritoRoute
   '/checkout': typeof CheckoutRoute
+  '/devoluciones': typeof DevolucionesRoute
+  '/envios': typeof EnviosRoute
   '/faq': typeof FaqRoute
   '/imagina': typeof ImaginaRoute
   '/pacific-chill': typeof PacificChillRoute
@@ -124,6 +142,8 @@ export interface FileRouteTypes {
     | '/bacarouge'
     | '/carrito'
     | '/checkout'
+    | '/devoluciones'
+    | '/envios'
     | '/faq'
     | '/imagina'
     | '/pacific-chill'
@@ -137,6 +157,8 @@ export interface FileRouteTypes {
     | '/bacarouge'
     | '/carrito'
     | '/checkout'
+    | '/devoluciones'
+    | '/envios'
     | '/faq'
     | '/imagina'
     | '/pacific-chill'
@@ -150,6 +172,8 @@ export interface FileRouteTypes {
     | '/bacarouge'
     | '/carrito'
     | '/checkout'
+    | '/devoluciones'
+    | '/envios'
     | '/faq'
     | '/imagina'
     | '/pacific-chill'
@@ -164,6 +188,8 @@ export interface RootRouteChildren {
   BacarougeRoute: typeof BacarougeRoute
   CarritoRoute: typeof CarritoRoute
   CheckoutRoute: typeof CheckoutRoute
+  DevolucionesRoute: typeof DevolucionesRoute
+  EnviosRoute: typeof EnviosRoute
   FaqRoute: typeof FaqRoute
   ImaginaRoute: typeof ImaginaRoute
   PacificChillRoute: typeof PacificChillRoute
@@ -201,6 +227,20 @@ declare module '@tanstack/react-router' {
       path: '/checkout'
       fullPath: '/checkout'
       preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/devoluciones': {
+      id: '/devoluciones'
+      path: '/devoluciones'
+      fullPath: '/devoluciones'
+      preLoaderRoute: typeof DevolucionesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/envios': {
+      id: '/envios'
+      path: '/envios'
+      fullPath: '/envios'
+      preLoaderRoute: typeof EnviosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -260,6 +300,8 @@ const rootRouteChildren: RootRouteChildren = {
   BacarougeRoute: BacarougeRoute,
   CarritoRoute: CarritoRoute,
   CheckoutRoute: CheckoutRoute,
+  DevolucionesRoute: DevolucionesRoute,
+  EnviosRoute: EnviosRoute,
   FaqRoute: FaqRoute,
   ImaginaRoute: ImaginaRoute,
   PacificChillRoute: PacificChillRoute,

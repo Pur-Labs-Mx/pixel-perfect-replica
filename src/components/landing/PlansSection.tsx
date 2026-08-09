@@ -1,9 +1,14 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import { Check, ChevronLeft, ChevronRight, Truck } from "lucide-react";
-import { plans, products, type Plan } from "@/data/catalog";
+import { plans, availableProducts, type Plan } from "@/data/catalog";
+import { BuyButton } from "@/components/ui/BuyButton";
+import { useCart } from "@/lib/cart";
 
 function PlanCard({ plan }: { plan: Plan }) {
   const [selected, setSelected] = useState<string[]>([]);
+  const { add } = useCart();
+  const navigate = useNavigate();
 
   const toggle = (name: string) => {
     setSelected((prev) => {
@@ -13,7 +18,26 @@ function PlanCard({ plan }: { plan: Plan }) {
     });
   };
 
+  const complete = selected.length === plan.pieces;
+
+  const addToCart = () => {
+    if (!complete) return;
+    const first = availableProducts.find((p) => p.name === selected[0]);
+    add({
+      productId: plan.id === "single" ? (first?.id ?? plan.id) : plan.id,
+      name: plan.id === "single" ? (first?.name ?? plan.title) : plan.title,
+      slug: plan.id === "single" ? (first?.slug ?? "") : "",
+      image: first?.soapImage ?? "",
+      variant: plan.title,
+      fragrances: selected,
+      unitPrice: plan.price,
+    });
+    setSelected([]);
+    void navigate({ to: "/carrito" });
+  };
+
   const featured = plan.featured;
+
 
   return (
     <article
