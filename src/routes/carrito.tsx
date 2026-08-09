@@ -111,7 +111,6 @@ function CarritoPage() {
               Descubre nuestras fragancias de autor o elige un plan y ahorra en tu ritual diario.
             </p>
             <div className="mt-8">
-              <BuyButton to="/" href={undefined as never} className="hidden" />
               <BuyButton href="/#suscripciones">Ver suscripciones</BuyButton>
             </div>
           </div>
@@ -218,10 +217,9 @@ function CarritoPage() {
             </h2>
             <div className="mt-8 grid gap-6 sm:grid-cols-3">
               {suggested.map((product) => (
-                <Link
+                <a
                   key={product.id}
-                  to="/producto/$slug"
-                  params={{ slug: product.slug }}
+                  href={`/#${product.slug}`}
                   className="group rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition hover:border-white/30"
                 >
                   <div className="aspect-[4/5] w-full overflow-hidden rounded-xl bg-white/5">
@@ -233,7 +231,7 @@ function CarritoPage() {
                   </div>
                   <p className="mt-4 font-heading text-lg italic text-[var(--ivory)]">{product.name}</p>
                   <p className="mt-1 font-body text-sm text-white/60">{formatMXN(product.price)}</p>
-                </Link>
+                </a>
               ))}
             </div>
           </section>
