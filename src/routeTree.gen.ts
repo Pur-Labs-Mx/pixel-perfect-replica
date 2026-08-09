@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BacarougeRouteImport } from './routes/bacarouge'
 import { Route as CarritoRouteImport } from './routes/carrito'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as DevolucionesRouteImport } from './routes/devoluciones'
 import { Route as EnviosRouteImport } from './routes/envios'
 import { Route as FaqRouteImport } from './routes/faq'
@@ -41,6 +42,11 @@ const CarritoRoute = CarritoRouteImport.update({
 const CheckoutRoute = CheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DevolucionesRoute = DevolucionesRouteImport.update({
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/bacarouge': typeof BacarougeRoute
   '/carrito': typeof CarritoRoute
   '/checkout': typeof CheckoutRoute
+  '/contacto': typeof ContactoRoute
   '/devoluciones': typeof DevolucionesRoute
   '/envios': typeof EnviosRoute
   '/faq': typeof FaqRoute
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/bacarouge': typeof BacarougeRoute
   '/carrito': typeof CarritoRoute
   '/checkout': typeof CheckoutRoute
+  '/contacto': typeof ContactoRoute
   '/devoluciones': typeof DevolucionesRoute
   '/envios': typeof EnviosRoute
   '/faq': typeof FaqRoute
@@ -125,6 +133,7 @@ export interface FileRoutesById {
   '/bacarouge': typeof BacarougeRoute
   '/carrito': typeof CarritoRoute
   '/checkout': typeof CheckoutRoute
+  '/contacto': typeof ContactoRoute
   '/devoluciones': typeof DevolucionesRoute
   '/envios': typeof EnviosRoute
   '/faq': typeof FaqRoute
@@ -142,6 +151,7 @@ export interface FileRouteTypes {
     | '/bacarouge'
     | '/carrito'
     | '/checkout'
+    | '/contacto'
     | '/devoluciones'
     | '/envios'
     | '/faq'
@@ -157,6 +167,7 @@ export interface FileRouteTypes {
     | '/bacarouge'
     | '/carrito'
     | '/checkout'
+    | '/contacto'
     | '/devoluciones'
     | '/envios'
     | '/faq'
@@ -172,6 +183,7 @@ export interface FileRouteTypes {
     | '/bacarouge'
     | '/carrito'
     | '/checkout'
+    | '/contacto'
     | '/devoluciones'
     | '/envios'
     | '/faq'
@@ -188,6 +200,7 @@ export interface RootRouteChildren {
   BacarougeRoute: typeof BacarougeRoute
   CarritoRoute: typeof CarritoRoute
   CheckoutRoute: typeof CheckoutRoute
+  ContactoRoute: typeof ContactoRoute
   DevolucionesRoute: typeof DevolucionesRoute
   EnviosRoute: typeof EnviosRoute
   FaqRoute: typeof FaqRoute
@@ -227,6 +240,13 @@ declare module '@tanstack/react-router' {
       path: '/checkout'
       fullPath: '/checkout'
       preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/devoluciones': {
@@ -300,6 +320,7 @@ const rootRouteChildren: RootRouteChildren = {
   BacarougeRoute: BacarougeRoute,
   CarritoRoute: CarritoRoute,
   CheckoutRoute: CheckoutRoute,
+  ContactoRoute: ContactoRoute,
   DevolucionesRoute: DevolucionesRoute,
   EnviosRoute: EnviosRoute,
   FaqRoute: FaqRoute,

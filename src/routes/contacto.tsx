@@ -18,16 +18,20 @@ export const Route = createFileRoute("/contacto")({
 });
 
 function ContactoPage() {
-  const [values, setValues] = useState({ nombre: "", email: "", mensaje: "" });
+  const [values, setValues] = useState<{ nombre: string; email: string; mensaje: string }>({
+    nombre: "",
+    email: "",
+    mensaje: "",
+  });
   const [errors, setErrors] = useState<Record<string, boolean>>({});
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const nextErrors: Record<string, boolean> = {};
-    if (!values.nombre.trim()) nextErrors.nombre = true;
-    if (!values.email.trim()) nextErrors.email = true;
-    if (!values.mensaje.trim()) nextErrors.mensaje = true;
+    if (!values['nombre'].trim()) nextErrors.nombre = true;
+    if (!values['email'].trim()) nextErrors.email = true;
+    if (!values['mensaje'].trim()) nextErrors.mensaje = true;
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
     setSubmitted(true);
@@ -52,8 +56,8 @@ function ContactoPage() {
           <div className="mt-10 rounded-2xl border border-[var(--tiffany)]/40 bg-white/[0.03] p-8">
             <p className="font-heading text-xl italic text-[var(--ivory)]">Mensaje recibido.</p>
             <p className="mt-3 font-body text-[15px] leading-relaxed text-white/70">
-              Gracias, {values.nombre}. Aún no tenemos un sistema automático de respuestas conectado
-              [PENDIENTE], pero tu mensaje quedó registrado y te responderemos a {values.email} en cuanto
+              Gracias, {values['nombre']}. Aún no tenemos un sistema automático de respuestas conectado
+              [PENDIENTE], pero tu mensaje quedó registrado y te responderemos a {values['email']} en cuanto
               podamos.
             </p>
           </div>
@@ -66,14 +70,14 @@ function ContactoPage() {
               <input
                 id="nombre"
                 required
-                value={values.nombre}
+                value={values['nombre']}
                 onChange={(e) => setValues((v) => ({ ...v, nombre: e.target.value }))}
-                aria-invalid={errors.nombre || undefined}
+                aria-invalid={errors['nombre'] || undefined}
                 className={`mt-2 min-h-[48px] w-full rounded-lg border bg-white/[0.03] px-4 font-body text-sm text-[var(--white-soft)] placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[var(--tiffany-active)] ${
-                  errors.nombre ? "border-red-400/70" : "border-white/15"
+                  errors['nombre'] ? "border-red-400/70" : "border-white/15"
                 }`}
               />
-              {errors.nombre && <p className="mt-1 font-body text-[12px] text-red-400">Este campo es obligatorio.</p>}
+              {errors['nombre'] && <p className="mt-1 font-body text-[12px] text-red-400">Este campo es obligatorio.</p>}
             </div>
             <div>
               <label htmlFor="contact-email" className="font-body text-[11px] tracking-[0.14em] uppercase text-white/60">
@@ -83,14 +87,14 @@ function ContactoPage() {
                 id="contact-email"
                 type="email"
                 required
-                value={values.email}
+                value={values['email']}
                 onChange={(e) => setValues((v) => ({ ...v, email: e.target.value }))}
-                aria-invalid={errors.email || undefined}
+                aria-invalid={errors['email'] || undefined}
                 className={`mt-2 min-h-[48px] w-full rounded-lg border bg-white/[0.03] px-4 font-body text-sm text-[var(--white-soft)] placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[var(--tiffany-active)] ${
-                  errors.email ? "border-red-400/70" : "border-white/15"
+                  errors['email'] ? "border-red-400/70" : "border-white/15"
                 }`}
               />
-              {errors.email && <p className="mt-1 font-body text-[12px] text-red-400">Este campo es obligatorio.</p>}
+              {errors['email'] && <p className="mt-1 font-body text-[12px] text-red-400">Este campo es obligatorio.</p>}
             </div>
             <div>
               <label htmlFor="mensaje" className="font-body text-[11px] tracking-[0.14em] uppercase text-white/60">
@@ -100,14 +104,14 @@ function ContactoPage() {
                 id="mensaje"
                 rows={5}
                 required
-                value={values.mensaje}
+                value={values['mensaje']}
                 onChange={(e) => setValues((v) => ({ ...v, mensaje: e.target.value }))}
-                aria-invalid={errors.mensaje || undefined}
+                aria-invalid={errors['mensaje'] || undefined}
                 className={`mt-2 w-full rounded-lg border bg-white/[0.03] px-4 py-3 font-body text-sm text-[var(--white-soft)] placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[var(--tiffany-active)] ${
-                  errors.mensaje ? "border-red-400/70" : "border-white/15"
+                  errors['mensaje'] ? "border-red-400/70" : "border-white/15"
                 }`}
               />
-              {errors.mensaje && <p className="mt-1 font-body text-[12px] text-red-400">Este campo es obligatorio.</p>}
+              {errors['mensaje'] && <p className="mt-1 font-body text-[12px] text-red-400">Este campo es obligatorio.</p>}
             </div>
             <BuyButton type="submit" onClick={() => {}} fullWidth>
               Enviar mensaje

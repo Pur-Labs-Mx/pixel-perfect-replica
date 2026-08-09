@@ -121,7 +121,7 @@ function PlanCard({ plan }: { plan: Plan }) {
           </span>
         </p>
         <div className="mt-2 flex flex-wrap gap-1.5">
-          {products.map((product) => {
+          {availableProducts.map((product) => {
             const isSelected = selected.includes(product.name);
             return (
               <button
