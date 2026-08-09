@@ -82,10 +82,10 @@ function CheckoutPage() {
           </div>
         ) : submitted ? (
           <div className="mt-16 rounded-2xl border border-[var(--tiffany)]/40 bg-white/[0.03] p-10 text-center">
-            <p className="font-heading text-2xl italic text-[var(--ivory)]">¡Gracias, {values.nombre}!</p>
+            <p className="font-heading text-2xl italic text-[var(--ivory)]">¡Gracias, {values['nombre']}!</p>
             <p className="mt-4 max-w-lg mx-auto font-body text-[15px] leading-relaxed text-white/70">
               Recibimos los datos de tu pedido por {formatMXN(total)}. El pago en línea aún no está conectado —
-              nuestro equipo se pondrá en contacto contigo a {values.email || "tu correo"} para confirmar el
+              nuestro equipo se pondrá en contacto contigo a {values['email'] || "tu correo"} para confirmar el
               método de pago (OXXO, PayPal o Mercado Pago).
             </p>
             <div className="mt-8">
