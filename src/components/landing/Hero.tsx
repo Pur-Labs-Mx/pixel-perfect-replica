@@ -1,16 +1,92 @@
-import { ArrowUpRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 import { BuyButton } from "@/components/ui/BuyButton";
+import { SecondaryButton } from "@/components/ui/SecondaryButton";
 
-import heroPoster from "@/assets/hero-model.png";
+import heroPoster from "@/assets/hero-model.webp";
 import { products } from "@/data/catalog";
 
 const hero = products[0]!;
 
+/** Determina si el video debe omitirse (movimiento reducido o conexión lenta). */
+function shouldSkipVideo(): boolean {
+  if (typeof window === "undefined") return true;
+  const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion) return true;
+  const nav = navigator as Navigator & {
+    connection?: { saveData?: boolean; effectiveType?: string };
+  };
+  const connection = nav.connection;
+  if (connection?.saveData) return true;
+  if (connection?.effectiveType && /2g|3g/.test(connection.effectiveType)) return true;
+  return false;
+}
+
 export function Hero() {
+  const [videoReady, setVideoReady] = useState(false);
+  const [videoAllowed, setVideoAllowed] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Difiere la carga del video a después de hidratación + primer idle,
+  // y sólo si la sección es visible y las condiciones de red/movimiento lo permiten.
+  useEffect(() => {
+    if (shouldSkipVideo()) return;
+
+    let idleId: number | undefined;
+    let observer: IntersectionObserver | undefined;
+
+    const enable = () => setVideoAllowed(true);
+
+    const schedule = () => {
+      if ("requestIdleCallback" in window) {
+        idleId = window.requestIdleCallback(enable, { timeout: 2000 });
+      } else {
+        idleId = window.setTimeout(enable, 300) as unknown as number;
+      }
+    };
+
+    if (sectionRef.current && "IntersectionObserver" in window) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            schedule();
+            observer?.disconnect();
+          }
+        },
+        { threshold: 0.1 },
+      );
+      observer.observe(sectionRef.current);
+    } else {
+      schedule();
+    }
+
+    return () => {
+      observer?.disconnect();
+      if (idleId !== undefined) {
+        if ("cancelIdleCallback" in window) window.cancelIdleCallback(idleId);
+        else window.clearTimeout(idleId);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!videoAllowed) return;
+    const video = videoRef.current;
+    if (!video) return;
+    video.load();
+    const onCanPlay = () => {
+      video.play().catch(() => {});
+      setVideoReady(true);
+    };
+    video.addEventListener("canplay", onCanPlay, { once: true });
+    return () => video.removeEventListener("canplay", onCanPlay);
+  }, [videoAllowed]);
+
   return (
     <section
       id="top"
+      ref={sectionRef}
       className="relative flex min-h-[100svh] flex-col overflow-hidden bg-[var(--black)] text-[var(--warm-white)]"
     >
       <div className="absolute inset-0" aria-hidden="true">
@@ -18,22 +94,30 @@ export function Hero() {
           <img
             src={heroPoster}
             alt=""
-            className="absolute inset-0 h-full w-full object-cover"
+            width={1448}
+            height={1086}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out ${
+              videoReady ? "opacity-0" : "opacity-100"
+            }`}
             loading="eager"
             decoding="async"
+            fetchPriority="high"
           />
-          <video
-            poster={heroPoster}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            className="absolute inset-0 h-full w-full object-cover"
-          >
-            <source src="/media/hero-video-desktop.webm" type="video/webm" />
-            <source src="/media/hero-video-desktop.mp4" type="video/mp4" />
-          </video>
+          {videoAllowed && (
+            <video
+              ref={videoRef}
+              muted
+              loop
+              playsInline
+              preload="none"
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out ${
+                videoReady ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <source src="/media/hero-video-desktop.webm" type="video/webm" />
+              <source src="/media/hero-video-desktop.mp4" type="video/mp4" />
+            </video>
+          )}
         </div>
         <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/45 to-black/10" />
         <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-black/40" />
@@ -85,19 +169,15 @@ export function Hero() {
                 Comprar ahora
               </BuyButton>
 
-              <a
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/45 px-8 py-4 font-body text-[12px] font-semibold tracking-[0.22em] uppercase text-[var(--white-soft)] transition-colors duration-200 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:outline-none"
-                href="#fragrances"
-              >
-                <span>Ver la colección</span>
-                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-              </a>
+              <SecondaryButton href="#fragrances" aria-label="Ver la colección">
+                Ver la colección
+              </SecondaryButton>
 
               <a
                 href="/faq"
                 className="font-body text-[11px] tracking-[0.28em] uppercase text-white/70 underline-offset-4 hover:text-white hover:underline"
               >
-                Preguntas frecuentes →
+                Preguntas frecuentes
               </a>
             </div>
           </div>
@@ -105,7 +185,7 @@ export function Hero() {
       </div>
 
       <div className="pointer-events-none absolute inset-x-6 bottom-6 z-10 flex items-end justify-between font-body text-[10px] tracking-[0.32em] uppercase text-[var(--smoke)] sm:inset-x-10">
-        <span>↓ Desliza para descubrir</span>
+        <span>Desliza para descubrir</span>
         <span className="hidden sm:inline">Jabón perfumado de autor</span>
       </div>
     </section>
