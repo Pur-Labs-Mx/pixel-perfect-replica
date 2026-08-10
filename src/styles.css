@@ -29,6 +29,7 @@
   --tiffany-bright: #00e5e5;
   /* Botón de compra único */
   --tiffany-border: #0abab5;
+  --tiffany-border-strong: #2be2dd;
   --buy-bg: #0a0a0a;
 
   /* Type scale */
@@ -575,6 +576,10 @@
 
 /* ---------------------------------------------------------------
    Botón de compra único (negro + borde Tiffany + destello diagonal)
+   Todos los CTAs de compra usan .buy-shine:
+   - ::before -> barrido diagonal blanco/tiffany (izq -> der), ciclo ~4-5s
+   - ::after  -> brillo perimetral animado alrededor del borde Tiffany
+   Ambas capas usan pointer-events:none para no bloquear clics.
    --------------------------------------------------------------- */
 @utility buy-shine {
   position: relative;
@@ -599,11 +604,34 @@
       transparent 100%
     );
     transform: translateX(-160%) skewX(-18deg);
-    animation: buy-sheen 4.2s cubic-bezier(0.22, 1, 0.36, 1) 1s infinite;
+    animation: buy-sheen 4.6s cubic-bezier(0.22, 1, 0.36, 1) 1s infinite;
   }
 
   &:hover::before {
     animation: buy-sheen 1.1s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -1.5px;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    padding: 1.5px;
+    background: conic-gradient(
+      from var(--buy-glow-angle, 0deg),
+      transparent 0%,
+      var(--tiffany-border-strong) 12%,
+      transparent 26%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.55;
+    animation: buy-perimeter-glow 4.6s linear infinite;
   }
 }
 
@@ -623,6 +651,21 @@
     transform: translateX(340%) skewX(-18deg);
     opacity: 0;
   }
+}
+
+@keyframes buy-perimeter-glow {
+  0% {
+    --buy-glow-angle: 0deg;
+  }
+  100% {
+    --buy-glow-angle: 360deg;
+  }
+}
+
+@property --buy-glow-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
 }
 
 /* ---------------------------------------------------------------
@@ -678,8 +721,38 @@ body {
     opacity: 0.2;
     animation: none !important;
   }
+  .buy-shine::after {
+    opacity: 0.35;
+    animation: none !important;
+  }
+  .secondary-btn {
+    transition: none !important;
+  }
   [style*="pur-marquee"] {
     animation: none !important;
   }
 }
 
+
+/* ---------------------------------------------------------------
+   Reflejo de producto (.soap-reflection)
+   Uso: colocar debajo de la imagen del producto un elemento espejado.
+   Ejemplo:
+     <div className="relative">
+       <img src={producto} alt="..." />
+       <img src={producto} alt="" aria-hidden="true" className="soap-reflection" />
+     </div>
+   Genera un reflejo MUY tenue (opacidad ~0.16-0.22), invertido en Y,
+   con desvanecido progresivo hacia abajo (mask-image) y ligero blur.
+   No usar en componentes de producto directamente desde este archivo:
+   la aplicación la realiza cada componente que lo necesite.
+   --------------------------------------------------------------- */
+@utility soap-reflection {
+  display: block;
+  transform: scaleY(-1);
+  opacity: 0.18;
+  filter: blur(1.5px);
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 65%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 65%);
+}
