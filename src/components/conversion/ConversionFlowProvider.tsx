@@ -5,8 +5,8 @@ import { plans, type Plan, type Product } from "@/data/catalog";
 import { useCart } from "@/lib/cart";
 import { trackEvent } from "@/lib/tracking";
 import { DOWNSELL_OFFER, UPSELL_OFFER } from "@/lib/site";
-import { PopupShell } from "@/components/conversion/PopupShell";
-import { BuyButton } from "@/components/ui/BuyButton";
+import { UpsellPopup } from "@/components/conversion/UpsellPopup";
+import { DownsellPopup } from "@/components/conversion/DownsellPopup";
 
 /**
  * Ítem que dispara el flujo de compra: una fragancia individual (equivale
@@ -144,67 +144,20 @@ export function ConversionFlowProvider({ children }: { children: ReactNode }) {
     <BuyFlowContext.Provider value={value}>
       {children}
 
-      <PopupShell
-        open={stage === "upsell" && !!upsellPlan}
+      <UpsellPopup
+        open={stage === "upsell"}
+        plan={upsellPlan}
+        onAccept={acceptUpsell}
+        onDecline={declineUpsell}
         onClose={closeAll}
-        labelledBy="upsell-popup-title"
-      >
-        <h2 id="upsell-popup-title" className="font-heading italic text-2xl sm:text-3xl text-[var(--ivory)]">
-          Lleva más, ahorra más.
-        </h2>
-        {upsellPlan && (
-          <>
-            <p className="mt-3 font-body text-sm text-[var(--gray-muted)]">
-              Sube a {upsellPlan.title.toLowerCase()} ({upsellPlan.pieces} piezas) por solo{" "}
-              <span className="text-[var(--tiffany)]">${upsellPlan.price} MXN</span>.
-              {upsellPlan.savingLabel ? ` ${upsellPlan.savingLabel}.` : ""}
-            </p>
-            <p className="mt-2 font-body text-xs uppercase tracking-[0.14em] text-[var(--tiffany)]">
-              {UPSELL_OFFER.label}
-            </p>
-            <div className="mt-6 flex flex-col gap-3">
-              <BuyButton onClick={acceptUpsell} fullWidth>
-                Sí, quiero {upsellPlan.title.toLowerCase()}
-              </BuyButton>
-              <button
-                type="button"
-                onClick={declineUpsell}
-                className="min-h-[44px] font-body text-xs uppercase tracking-[0.14em] text-[var(--gray-muted)] underline-offset-4 hover:text-[var(--tiffany)] hover:underline"
-              >
-                Continuar con mi selección
-              </button>
-            </div>
-          </>
-        )}
-      </PopupShell>
+      />
 
-      <PopupShell
+      <DownsellPopup
         open={stage === "downsell"}
+        onAccept={acceptDownsell}
+        onDecline={declineDownsell}
         onClose={closeAll}
-        labelledBy="downsell-popup-title"
-      >
-        <h2 id="downsell-popup-title" className="font-heading italic text-2xl sm:text-3xl text-[var(--ivory)]">
-          Espera, una última cosa.
-        </h2>
-        <p className="mt-3 font-body text-sm text-[var(--gray-muted)]">
-          Quédate con tu elección y llévate {DOWNSELL_OFFER.percentOff}% de descuento adicional.
-        </p>
-        <p className="mt-2 font-body text-xs uppercase tracking-[0.14em] text-[var(--tiffany)]">
-          {DOWNSELL_OFFER.label}: {DOWNSELL_OFFER.code}
-        </p>
-        <div className="mt-6 flex flex-col gap-3">
-          <BuyButton onClick={acceptDownsell} fullWidth>
-            Aplicar y continuar
-          </BuyButton>
-          <button
-            type="button"
-            onClick={declineDownsell}
-            className="min-h-[44px] font-body text-xs uppercase tracking-[0.14em] text-[var(--gray-muted)] underline-offset-4 hover:text-[var(--tiffany)] hover:underline"
-          >
-            No, gracias, continuar
-          </button>
-        </div>
-      </PopupShell>
+      />
     </BuyFlowContext.Provider>
   );
 }
