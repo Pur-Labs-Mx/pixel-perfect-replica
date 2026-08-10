@@ -8,6 +8,8 @@ import { useCart } from "@/lib/cart";
  * CTA de compra persistente.
  * Siempre visible durante el scroll, con la misma identidad visual
  * (negro + borde Tiffany + destello) que el resto de los botones de compra.
+ * Se ancla al centro inferior (nunca a las esquinas) para dejar libres
+ * la esquina inferior izquierda (botón de audio) y la derecha (chat en vivo).
  */
 export function PersistentBuyCta() {
   const [visible, setVisible] = useState(false);
@@ -30,16 +32,16 @@ export function PersistentBuyCta() {
 
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-[80] flex justify-center px-4 pb-[max(1rem,env(safe-area-inset-bottom))] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:inset-x-auto sm:right-8 sm:bottom-8 sm:px-0 ${
+      className={`fixed inset-x-0 bottom-0 z-[80] flex justify-center px-16 pb-[max(1rem,env(safe-area-inset-bottom))] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-24 ${
         visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
       }`}
     >
       {hasItems ? (
-        <BuyButton to={target} fullWidth className="sm:w-auto shadow-[0_18px_40px_-18px_rgba(0,0,0,0.9)]">
+        <BuyButton to={target} className="shadow-[0_18px_40px_-18px_rgba(0,0,0,0.9)]">
           {label}
         </BuyButton>
       ) : (
-        <BuyButton href={target} fullWidth className="sm:w-auto shadow-[0_18px_40px_-18px_rgba(0,0,0,0.9)]">
+        <BuyButton href={target} className="shadow-[0_18px_40px_-18px_rgba(0,0,0,0.9)]">
           {label}
         </BuyButton>
       )}

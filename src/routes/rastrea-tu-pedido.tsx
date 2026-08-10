@@ -39,15 +39,14 @@ function RastreaPage() {
           Rastrea tu pedido.
         </h1>
         <p className="mt-4 font-body text-[15px] leading-relaxed text-white/60">
-          El rastreo en tiempo real se conectará con nuestro sistema de pedidos [PENDIENTE]. Mientras tanto,
-          déjanos tus datos y te ayudamos manualmente.
+          Déjanos tu número de pedido y correo electrónico; nuestro equipo revisará el estado de tu envío y te
+          responderá con la información más reciente.
         </p>
 
         {submitted ? (
           <div className="mt-12 rounded-2xl border border-[var(--tiffany)]/40 bg-white/[0.03] p-8">
             <p className="font-heading text-xl italic text-[var(--ivory)]">Solicitud recibida.</p>
             <p className="mt-3 font-body text-[15px] leading-relaxed text-white/70">
-              El rastreo automático todavía no está disponible [PENDIENTE: integración con sistema de pedidos].
               Nuestro equipo revisará el pedido {orderId} y te responderá a {email} en cuanto tenga novedades.
             </p>
           </div>
@@ -91,10 +90,11 @@ function RastreaPage() {
         <div className="mt-14 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
           <p className="font-body text-[10px] tracking-[0.24em] uppercase text-white/55">Contacto directo</p>
           <p className="mt-3 font-body text-sm text-white/70">
-            Correo: [PENDIENTE: correo oficial de atención]
-          </p>
-          <p className="mt-2 font-body text-sm text-white/70">
-            WhatsApp: [PENDIENTE: número oficial de atención]
+            ¿Prefieres escribirnos? Visita nuestra{" "}
+            <a href="/contacto" className="underline underline-offset-4 hover:text-white">
+              página de contacto
+            </a>{" "}
+            y cuéntanos los detalles de tu pedido.
           </p>
         </div>
       </main>

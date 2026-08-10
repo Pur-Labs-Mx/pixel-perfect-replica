@@ -1,4 +1,5 @@
 import { BuyButton } from "@/components/ui/BuyButton";
+import { SecondaryButton } from "@/components/ui/SecondaryButton";
 import purLogoWhite from "@/assets/pur-logo-white.png";
 
 export function ConvertSection() {
@@ -53,12 +54,9 @@ export function ConvertSection() {
         </div>
         <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
           <BuyButton href="#suscripciones">Encontrar mi fragancia</BuyButton>
-          <a
-            href="#fragrances"
-            className="inline-flex min-h-[52px] items-center justify-center rounded-full border border-white/45 px-8 font-body text-[13px] font-bold tracking-[0.18em] uppercase text-[var(--white-soft)] transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-          >
+          <SecondaryButton href="#fragrances" aria-label="Ver la colección">
             Ver la colección
-          </a>
+          </SecondaryButton>
         </div>
         <p className="mt-14 font-body text-[10px] tracking-[0.32em] uppercase text-[var(--gray-muted)]">
           Tres perfiles olfativos · Piezas translúcidas perfumadas

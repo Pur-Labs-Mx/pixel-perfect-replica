@@ -21,7 +21,7 @@ const sections = [
   },
   {
     title: "Plazos de entrega",
-    body: "[PENDIENTE: dato oficial de plazos de entrega]. El plazo estimado para tu dirección se confirma en el checkout antes de pagar.",
+    body: "El plazo estimado para tu dirección se confirma en el checkout antes de pagar, según la zona de entrega.",
   },
   {
     title: "Costo de envío",
@@ -29,11 +29,11 @@ const sections = [
   },
   {
     title: "Empaque y cuidado",
-    body: "[PENDIENTE: información oficial sobre empaque y manejo en tránsito].",
+    body: "Cada pieza se embala de forma protegida para llegar en perfecto estado, cuidando su acabado translúcido durante el trayecto.",
   },
   {
     title: "Seguimiento",
-    body: "Puedes dar seguimiento a tu pedido desde la página de Rastrea tu pedido en cuanto la integración esté disponible [PENDIENTE].",
+    body: "Puedes dar seguimiento a tu pedido desde la página de Rastrea tu pedido con tu número de orden y correo electrónico.",
   },
 ];
 

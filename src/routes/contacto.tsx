@@ -56,9 +56,8 @@ function ContactoPage() {
           <div className="mt-10 rounded-2xl border border-[var(--tiffany)]/40 bg-white/[0.03] p-8">
             <p className="font-heading text-xl italic text-[var(--ivory)]">Mensaje recibido.</p>
             <p className="mt-3 font-body text-[15px] leading-relaxed text-white/70">
-              Gracias, {values['nombre']}. Aún no tenemos un sistema automático de respuestas conectado
-              [PENDIENTE], pero tu mensaje quedó registrado y te responderemos a {values['email']} en cuanto
-              podamos.
+              Gracias, {values['nombre']}. Tu mensaje quedó registrado y nuestro equipo te responderá a{" "}
+              {values['email']} en cuanto podamos.
             </p>
           </div>
         ) : (
@@ -121,9 +120,10 @@ function ContactoPage() {
 
         <div className="mt-14 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
           <p className="font-body text-[10px] tracking-[0.24em] uppercase text-white/55">Otros canales</p>
-          <p className="mt-3 font-body text-sm text-white/70">Correo: [PENDIENTE: correo oficial de atención]</p>
-          <p className="mt-2 font-body text-sm text-white/70">WhatsApp: [PENDIENTE: número oficial de atención]</p>
-          <p className="mt-2 font-body text-sm text-white/70">Instagram: [PENDIENTE: usuario oficial]</p>
+          <p className="mt-3 font-body text-sm text-white/70">
+            Usa este formulario para cualquier consulta: es la vía más rápida para que nuestro equipo revise tu
+            caso.
+          </p>
         </div>
       </main>
       <SiteFooter />
