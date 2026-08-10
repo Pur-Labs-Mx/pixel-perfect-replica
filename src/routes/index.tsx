@@ -41,6 +41,9 @@ function Index() {
         </div>
 
         <ComparisonSection />
+        <LifestyleCarousel />
+        <WaveBanner />
+        <VideoTestimonials />
         <PlansSection />
         <PromiseSection />
         <FaqSection />
