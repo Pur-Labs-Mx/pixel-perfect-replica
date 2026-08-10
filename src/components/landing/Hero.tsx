@@ -42,7 +42,7 @@ export function Hero() {
       if ("requestIdleCallback" in window) {
         idleId = window.requestIdleCallback(enable, { timeout: 2000 });
       } else {
-        idleId = window.setTimeout(enable, 300) as unknown as number;
+        idleId = globalThis.setTimeout(enable, 300) as unknown as number;
       }
     };
 
