@@ -103,7 +103,7 @@ export function ProductPage({ product }: { product: Product }) {
                     src={product.soapImage}
                     alt={`${product.name} — jabón perfumado`}
                     loading="eager"
-                    className="relative z-10 h-auto max-h-[34vh] w-auto drop-shadow-2xl sm:max-h-[38vh]"
+                    className="relative z-10 h-auto max-h-[38vh] w-auto drop-shadow-2xl sm:max-h-[38vh]"
                   />
                   <img
                     src={product.soapImage}
