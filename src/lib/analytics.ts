@@ -1,25 +1,17 @@
 /**
- * Arquitectura de eventos de conversión.
- * Sin Pixel ID todavía: los eventos se registran en cola y se envían
- * a window.fbq / window.dataLayer si algún día existen.
- * Purchase NO debe dispararse hasta que exista una compra real.
+ * Capa de compatibilidad de analítica.
+ * Toda la lógica real vive en src/lib/tracking.ts (única fuente de verdad
+ * para IDs de píxeles y envío de eventos). Este módulo se mantiene para no
+ * romper los imports existentes (`track`, `getTrackedEvents`).
  */
-export type ConversionEvent = "AddToCart" | "InitiateCheckout" | "Purchase";
+import { trackEvent, getQueuedEvents, type ConversionEvent as TrackingEvent } from "@/lib/tracking";
+
+export type ConversionEvent = TrackingEvent;
 
 type Payload = Record<string, unknown>;
 
-const queue: { event: ConversionEvent; payload: Payload; at: number }[] = [];
-
 export function track(event: ConversionEvent, payload: Payload = {}) {
-  queue.push({ event, payload, at: Date.now() });
-  if (typeof window === "undefined") return;
-  const w = window as unknown as {
-    fbq?: (...args: unknown[]) => void;
-    dataLayer?: Payload[];
-  };
-  w.fbq?.("track", event, payload);
-  w.dataLayer?.push({ event, ...payload });
-  if (import.meta.env.DEV) console.info(`[analytics] ${event}`, payload);
+  trackEvent(event, payload);
 }
 
-export const getTrackedEvents = () => [...queue];
+export const getTrackedEvents = () => getQueuedEvents();
