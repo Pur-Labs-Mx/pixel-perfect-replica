@@ -65,7 +65,7 @@ export function Hero() {
       observer?.disconnect();
       if (idleId !== undefined) {
         if ("cancelIdleCallback" in window) window.cancelIdleCallback(idleId);
-        else window.clearTimeout(idleId);
+        else globalThis.clearTimeout(idleId);
       }
     };
   }, []);
