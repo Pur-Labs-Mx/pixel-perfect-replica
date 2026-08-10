@@ -258,7 +258,7 @@ export function ProductPage({ product }: { product: Product }) {
               <img src={product.bgImage} alt="" loading="lazy" className="h-full w-full object-cover" />
             </div>
             <div className="aspect-[4/5] w-full overflow-hidden rounded-2xl bg-[#0a0a0a]">
-              <img src={product.soapImage} alt={`${product.name} — detalle`} loading="lazy" className="h-full w-full object-contain p-8 -translate-y-6" />
+              <img src={product.soapImage} alt={`${product.name} — detalle`} loading="lazy" className="h-full w-full object-contain p-8" />
             </div>
           </div>
         </section>
