@@ -126,14 +126,16 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <CartProvider>
-        <LoadingScreen />
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
-        <PersistentBuyCta />
-        <AmbientAudio />
-        <SocialProofDemo />
-        <NewsletterPopup />
-        <ExitIntentPopup />
+        <ConversionFlowProvider>
+          <LoadingScreen />
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+          <PersistentBuyCta />
+          <AmbientAudio />
+          <SocialProofDemo />
+          <NewsletterPopup />
+          <ExitIntentPopup />
+        </ConversionFlowProvider>
       </CartProvider>
     </QueryClientProvider>
   );
