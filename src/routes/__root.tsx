@@ -18,6 +18,7 @@ import { AmbientAudio } from "@/components/conversion/AmbientAudio";
 import { SocialProofDemo } from "@/components/conversion/SocialProofDemo";
 import { NewsletterPopup } from "@/components/conversion/NewsletterPopup";
 import { ExitIntentPopup } from "@/components/conversion/ExitIntentPopup";
+import { ConversionFlowProvider } from "@/components/conversion/ConversionFlowProvider";
 
 function NotFoundComponent() {
   return (
