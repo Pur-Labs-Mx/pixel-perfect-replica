@@ -44,34 +44,40 @@ export const CURRENCY = "MXN";
 export const PROMO_LABEL = "Promoción de apertura";
 export const PIECE_WEIGHT = "180 g";
 
-const PENDING = "[PENDIENTE: información oficial]";
-
+// Placeholder editable: reemplazar name/displayName/family/claim/description/
+// notes/story/features/imágenes cuando el producto definitivo esté listo.
+// La estructura y el componente (ProductCard) NO cambian al actualizar datos.
 const placeholderProduct = (n: number, color: string, glow: string): Product => ({
-  id: `producto-0${n}`,
-  slug: `producto-0${n}`,
+  id: `producto-${n}`,
+  slug: `producto-${n}`,
   number: `0${n}`,
   name: `PRODUCTO 0${n}`,
   displayName: [`PRODUCTO 0${n}`],
-  family: "[PENDIENTE: familia olfativa]",
+  family: "Próximamente",
   price: 399,
   compareAtPrice: 800,
   discountPercent: 50,
   stock: 0,
   hot: false,
-  claim: "[PENDIENTE: claim de la fragancia]",
-  description: `${PENDING} Este espacio ya está preparado con el mismo sistema visual: al recibir foto, nombre, descripción y precio se integra automáticamente.`,
+  claim: "Una nueva fragancia de autor, muy pronto.",
+  description:
+    "Este espacio ya está preparado con el mismo sistema visual: al recibir foto, nombre, descripción y precio se integra automáticamente.",
   notes: [
-    { label: "Primera impresión", value: PENDING },
-    { label: "El corazón", value: PENDING },
-    { label: "La estela", value: PENDING },
+    { label: "Primera impresión", value: "Se revelará en el lanzamiento." },
+    { label: "El corazón", value: "Se revelará en el lanzamiento." },
+    { label: "La estela", value: "Se revelará en el lanzamiento." },
   ],
   signatureColor: color,
   glowColor: glow,
   bgImage: placeholderBg,
   soapImage: placeholderSoap,
   placeholder: true,
-  story: PENDING,
-  features: [`Pieza sólida de ${PIECE_WEIGHT}`, PENDING, PENDING],
+  story: "La historia de esta fragancia se compartirá muy pronto.",
+  features: [
+    `Pieza sólida de ${PIECE_WEIGHT}`,
+    "Detalles de composición: próximamente",
+    "Disponibilidad: próximamente",
+  ],
 });
 
 export const products: Product[] = [
@@ -267,19 +273,19 @@ export const faqs: { question: string; answer: string }[] = [
   },
   {
     question: "¿Cuánto dura una pieza en uso diario?",
-    answer: "[PENDIENTE: dato oficial del laboratorio].",
+    answer: "La duración exacta se publicará junto con los datos oficiales del laboratorio.",
   },
   {
     question: "¿La fragancia permanece en la piel después del baño?",
-    answer: "[PENDIENTE: respuesta oficial del equipo perfumista].",
+    answer: "Estamos documentando esta información con nuestro equipo perfumista; se publicará próximamente.",
   },
   {
     question: "¿Son aptos para piel sensible? ¿Qué ingredientes usan?",
-    answer: "[PENDIENTE: lista completa de ingredientes y validación dermatológica].",
+    answer: "La lista completa de ingredientes y su validación dermatológica se publicará próximamente.",
   },
   {
     question: "¿Aceptan devoluciones o cambios?",
-    answer: "[PENDIENTE: política oficial de devoluciones].",
+    answer: "Nuestra política de devoluciones y cambios se publicará próximamente.",
   },
 ];
 

@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/landing/SiteHeader";
 import { SiteFooter } from "@/components/landing/SiteFooter";
 import { BuyButton } from "@/components/ui/BuyButton";
 import { useCart } from "@/lib/cart";
+import { HotBadge } from "@/components/ui/HotBadge";
 import { faqs, plans, products, type Product } from "@/data/catalog";
 
 function OtherProducts({ current }: { current: Product }) {
@@ -96,21 +97,33 @@ export function ProductPage({ product }: { product: Product }) {
           <div className="mx-auto grid max-w-[1300px] items-center gap-12 px-6 py-16 sm:px-10 md:grid-cols-[45fr_55fr] md:py-24">
             <div className="relative order-2 md:order-1">
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
-                <img src={product.bgImage} alt="" loading="eager" className="h-full w-full object-cover" />
+                <img src={product.bgImage} alt="" loading="eager" className="h-full w-full object-cover object-center" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-[6%] z-10 flex flex-col items-center">
+                  <img
+                    src={product.soapImage}
+                    alt={`${product.name} — jabón perfumado`}
+                    loading="eager"
+                    className="relative z-10 h-auto max-h-[34vh] w-auto drop-shadow-2xl sm:max-h-[38vh]"
+                  />
+                  <img
+                    src={product.soapImage}
+                    alt=""
+                    aria-hidden="true"
+                    loading="eager"
+                    className="soap-reflection h-auto max-h-[16vh] w-auto sm:max-h-[18vh]"
+                  />
+                </div>
               </div>
-              <img
-                src={product.soapImage}
-                alt={`${product.name} — jabón perfumado`}
-                loading="eager"
-                className="pointer-events-none absolute -bottom-8 right-4 z-10 h-auto max-h-[45%] w-auto drop-shadow-2xl"
-              />
             </div>
             <div className="order-1 min-w-0 md:order-2">
-              {product.placeholder && (
-                <span className="mb-4 inline-flex items-center rounded-full border border-white/30 bg-white/5 px-3 py-1 font-body text-[9px] font-bold tracking-[0.22em] uppercase text-white/70">
-                  Próximamente · datos pendientes
-                </span>
-              )}
+              <div className="mb-4 flex flex-wrap items-center gap-2">
+                {product.hot && <HotBadge />}
+                {product.placeholder && (
+                  <span className="inline-flex items-center rounded-full border border-white/30 bg-white/5 px-3 py-1 font-body text-[9px] font-bold tracking-[0.22em] uppercase text-white/70">
+                    Próximamente
+                  </span>
+                )}
+              </div>
               <p className="font-body text-[10px] tracking-[0.32em] uppercase text-white/50">
                 Fragrance soap · Nº {product.number}
               </p>
@@ -197,10 +210,10 @@ export function ProductPage({ product }: { product: Product }) {
               </div>
 
               <div className="flex flex-1 flex-col gap-3 sm:flex-row">
-                <BuyButton onClick={handleAdd} disabled={product.placeholder ?? false} fullWidth>
-                  {added ? "Añadido ✓" : "Añadir al carrito"}
+                <BuyButton onClick={handleAdd} disabled={product.placeholder ?? false} fullWidth arrow={false}>
+                  {added ? "Añadido" : "Comprar ahora"}
                 </BuyButton>
-                <BuyButton to="/carrito" fullWidth>
+                <BuyButton to="/carrito" fullWidth arrow={false}>
                   Ver carrito
                 </BuyButton>
               </div>
@@ -304,8 +317,8 @@ export function ProductPage({ product }: { product: Product }) {
               {product.name} te está esperando.
             </h2>
             <div className="mt-8 flex justify-center">
-              <BuyButton onClick={handleAdd} disabled={product.placeholder ?? false}>
-                Añadir al carrito
+              <BuyButton onClick={handleAdd} disabled={product.placeholder ?? false} arrow={false}>
+                Comprar ahora
               </BuyButton>
             </div>
           </div>

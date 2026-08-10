@@ -2,16 +2,15 @@ import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
 /**
- * Botón de compra único de PŪR LABS.
- * TODOS los CTA de compra del sitio deben usar este componente:
- * fondo #0a0a0a, texto blanco, borde 2px Tiffany reforzado y destello premium (.buy-shine).
- * Sin flechas ni glifos: solo el texto.
+ * Botón secundario de PŪR LABS (p. ej. "Ver la colección").
+ * Misma tipografía y escala que BuyButton, pero con superficie translúcida
+ * ivory/Tiffany en lugar del negro sólido. Sin flechas ni glifos.
  */
-export const BUY_BUTTON_CLASS =
-  "buy-shine group relative inline-flex items-center justify-center gap-3 rounded-full px-6 sm:px-8 min-h-[52px] font-body font-bold uppercase whitespace-nowrap text-[13px] sm:text-[14px] tracking-[0.16em] sm:tracking-[0.18em] " +
-  "bg-[var(--buy-bg)] text-[var(--white-soft)] border-2 border-[var(--tiffany-border-strong)] " +
+export const SECONDARY_BUTTON_CLASS =
+  "secondary-btn relative inline-flex items-center justify-center gap-3 rounded-full px-6 sm:px-8 min-h-[52px] font-body font-bold uppercase whitespace-nowrap text-[13px] sm:text-[14px] tracking-[0.16em] sm:tracking-[0.18em] " +
+  "bg-[color-mix(in_oklab,var(--white-soft)_12%,transparent)] text-[var(--white-soft)] border-2 border-[color-mix(in_oklab,var(--white-soft)_55%,transparent)] backdrop-blur-sm " +
   "transition-[background-color,transform,box-shadow,border-color,color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] " +
-  "hover:-translate-y-[2px] hover:border-[var(--tiffany)] hover:shadow-[0_14px_30px_-14px_var(--tiffany-glow)] active:translate-y-0 " +
+  "hover:-translate-y-[2px] hover:bg-[color-mix(in_oklab,var(--tiffany)_16%,transparent)] hover:border-[var(--tiffany-border-strong)] hover:shadow-[0_14px_30px_-14px_var(--tiffany-glow)] active:translate-y-0 " +
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--tiffany-active)] focus-visible:ring-offset-[var(--black-deep)] " +
   "disabled:opacity-60 disabled:pointer-events-none";
 
@@ -19,8 +18,6 @@ type Props = {
   children: ReactNode;
   fullWidth?: boolean | undefined;
   className?: string | undefined;
-  /** @deprecated Ya no se renderiza ninguna flecha. Se mantiene por compatibilidad de tipos. */
-  arrow?: boolean | undefined;
   "aria-label"?: string | undefined;
   to?: string | undefined;
   params?: Record<string, string> | undefined;
@@ -30,10 +27,9 @@ type Props = {
   disabled?: boolean | undefined;
 };
 
-
-export function BuyButton(props: Props) {
+export function SecondaryButton(props: Props) {
   const { children, fullWidth, className = "" } = props;
-  const cls = `${BUY_BUTTON_CLASS} ${fullWidth ? "w-full" : ""} ${className}`;
+  const cls = `${SECONDARY_BUTTON_CLASS} ${fullWidth ? "w-full" : ""} ${className}`;
 
   const inner = <span className="relative z-[2]">{children}</span>;
 

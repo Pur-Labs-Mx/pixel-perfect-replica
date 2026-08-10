@@ -18,6 +18,7 @@ import { AmbientAudio } from "@/components/conversion/AmbientAudio";
 import { SocialProofDemo } from "@/components/conversion/SocialProofDemo";
 import { NewsletterPopup } from "@/components/conversion/NewsletterPopup";
 import { ExitIntentPopup } from "@/components/conversion/ExitIntentPopup";
+import { ConversionFlowProvider } from "@/components/conversion/ConversionFlowProvider";
 
 function NotFoundComponent() {
   return (
@@ -125,14 +126,16 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <CartProvider>
-        <LoadingScreen />
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
-        <PersistentBuyCta />
-        <AmbientAudio />
-        <SocialProofDemo />
-        <NewsletterPopup />
-        <ExitIntentPopup />
+        <ConversionFlowProvider>
+          <LoadingScreen />
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+          <PersistentBuyCta />
+          <AmbientAudio />
+          <SocialProofDemo />
+          <NewsletterPopup />
+          <ExitIntentPopup />
+        </ConversionFlowProvider>
       </CartProvider>
     </QueryClientProvider>
   );

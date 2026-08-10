@@ -4,7 +4,7 @@ import logoWhite from "@/assets/pur-logo-white.png";
 
 /**
  * Pantalla de carga de marca: logo, "Preparando el ritual" y línea animada.
- * Rápida (≈1.1 s) y con salida suave.
+ * Muestra sólo la primera vez por sesión; nunca dura más de 900 ms.
  */
 export function LoadingScreen() {
   const [phase, setPhase] = useState<"visible" | "leaving" | "gone">("visible");
@@ -14,11 +14,11 @@ export function LoadingScreen() {
       setPhase("gone");
       return;
     }
-    const leave = window.setTimeout(() => setPhase("leaving"), 1100);
+    const leave = window.setTimeout(() => setPhase("leaving"), 600);
     const done = window.setTimeout(() => {
       setPhase("gone");
       window.sessionStorage.setItem("purlabs.intro", "1");
-    }, 1800);
+    }, 900);
     return () => {
       window.clearTimeout(leave);
       window.clearTimeout(done);

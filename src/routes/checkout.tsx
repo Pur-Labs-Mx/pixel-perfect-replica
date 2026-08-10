@@ -142,7 +142,7 @@ function CheckoutPage() {
                       className="flex w-full items-center justify-between rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 font-body text-sm text-white/40 opacity-70"
                     >
                       <span>{method}</span>
-                      <span className="text-[10px] uppercase tracking-[0.14em]">Integración pendiente</span>
+                      <span className="text-[10px] uppercase tracking-[0.14em]">Próximamente</span>
                     </button>
                   ))}
                 </div>

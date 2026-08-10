@@ -1,6 +1,59 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { Truck } from "lucide-react";
 import purLogoWhite from "@/assets/pur-logo-white.png";
+import { tiktokUrl, instagramUrl } from "@/lib/site";
+
+/** Ícono monocromo de Instagram (trazo, coherente con el resto de iconografía). */
+function InstagramIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+/** Ícono monocromo de TikTok (nota musical estilizada), mismo grosor de trazo. */
+function TikTokIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+      <path d="M14 4v9.5a3.5 3.5 0 1 1-3-3.46" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M14 4c.6 2.3 2.2 3.7 4.5 4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function SocialLinks() {
+  if (!tiktokUrl && !instagramUrl) return null;
+  return (
+    <div className="mt-6 flex items-center gap-3">
+      {instagramUrl && (
+        <a
+          href={instagramUrl}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="PŪR LABS en Instagram"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/75 transition hover:border-white/40 hover:text-white"
+        >
+          <InstagramIcon />
+        </a>
+      )}
+      {tiktokUrl && (
+        <a
+          href={tiktokUrl}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="PŪR LABS en TikTok"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/75 transition hover:border-white/40 hover:text-white"
+        >
+          <TikTokIcon />
+        </a>
+      )}
+    </div>
+  );
+}
 
 export function SiteFooter() {
   const [email, setEmail] = useState("");
@@ -20,7 +73,7 @@ export function SiteFooter() {
       </div>
       <div className="relative mx-auto grid max-w-[1400px] gap-14 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-12">
         <div>
-          <img src={purLogoWhite} alt="PŪR LABS" className="h-10 w-auto sm:h-14" />
+          <img src={purLogoWhite} alt="PŪR LABS" width={340} height={140} className="h-10 w-auto sm:h-14" />
           <h3
             className="mt-8 font-heading italic leading-[0.95]"
             style={{ fontSize: "clamp(2rem, 3vw, 2.75rem)" }}
@@ -56,33 +109,28 @@ export function SiteFooter() {
               className="cta-shine group relative inline-flex items-center justify-center gap-3 rounded-full sm:px-8 min-h-[52px] font-body font-bold uppercase whitespace-nowrap text-[12px] sm:text-[13px] tracking-[0.16em] sm:tracking-[0.18em] shadow-[0_1px_0_rgba(0,0,0,0.04)] transition-[background-color,transform,box-shadow,border-color,color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--tiffany-active)] disabled:opacity-60 disabled:pointer-events-none bg-[var(--tiffany)] text-[#050505] hover:-translate-y-[2px] hover:bg-[var(--tiffany-hover)] hover:shadow-[0_14px_30px_-14px_var(--tiffany-glow)] active:translate-y-0 active:bg-[var(--tiffany-active)] px-6"
             >
               <span>Unirme</span>
-              <span
-                aria-hidden="true"
-                className="inline-block translate-x-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[3px] group-hover:-translate-y-[3px]"
-              >
-                ↗
-              </span>
             </button>
           </form>
           <p role="status" aria-live="polite" className="mt-3 min-h-[1.25rem] font-body text-[13px] text-[var(--tiffany)]" />
+          <SocialLinks />
         </div>
         <div>
           <p className="font-body text-[10px] tracking-[0.32em] uppercase text-[var(--gray-muted)]">Colección</p>
           <ul className="mt-6 space-y-3 font-body text-[15px] text-[var(--white-soft)]/85">
             <li>
-              <a href="/imagina" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <Link to="/imagina" className="inline-block min-h-[44px] py-1 hover:text-white">
                 IMAGINA
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/bacarouge" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <Link to="/bacarouge" className="inline-block min-h-[44px] py-1 hover:text-white">
                 BACAROUGE
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/pacific-chill" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <Link to="/pacific-chill" className="inline-block min-h-[44px] py-1 hover:text-white">
                 PACIFIC CHILL
-              </a>
+              </Link>
             </li>
             <li>
               <a href="/#suscripciones" className="inline-block min-h-[44px] py-1 hover:text-white">
@@ -95,29 +143,29 @@ export function SiteFooter() {
           <p className="font-body text-[10px] tracking-[0.32em] uppercase text-[var(--gray-muted)]">Ayuda</p>
           <ul className="mt-6 space-y-3 font-body text-[15px] text-[var(--white-soft)]/85">
             <li>
-              <a href="/faq" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <Link to="/faq" className="inline-block min-h-[44px] py-1 hover:text-white">
                 Preguntas Frecuentes
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/rastrea-tu-pedido" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <Link to="/rastrea-tu-pedido" className="inline-block min-h-[44px] py-1 hover:text-white">
                 Rastrea tu Pedido
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/envios" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <Link to="/envios" className="inline-block min-h-[44px] py-1 hover:text-white">
                 Política de Envío
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/devoluciones" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <Link to="/devoluciones" className="inline-block min-h-[44px] py-1 hover:text-white">
                 Política de Devolución
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/contacto" className="inline-block min-h-[44px] py-1 hover:text-white">
+              <Link to="/contacto" className="inline-block min-h-[44px] py-1 hover:text-white">
                 Contacto
-              </a>
+              </Link>
             </li>
             <li>
               <div className="flex items-center gap-2 font-body text-[11px] tracking-[0.06em] text-[var(--white-soft)]/70 justify-start py-1">
@@ -138,16 +186,6 @@ export function SiteFooter() {
             <li>
               <a href="/#suscripciones" className="inline-block min-h-[44px] py-1 hover:text-white">
                 Encontrar mi fragancia
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://instagram.com/purlabs"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-block min-h-[44px] py-1 hover:text-white"
-              >
-                Instagram
               </a>
             </li>
           </ul>
@@ -179,13 +217,13 @@ export function SiteFooter() {
         <div className="mt-6 flex flex-wrap items-center justify-between gap-3 font-body text-[10px] tracking-[0.28em] uppercase text-[var(--gray-muted)]">
           <span>© 2026 PŪR LABS · México</span>
           <span>
-            <a href="/devoluciones" className="hover:text-white">
+            <Link to="/devoluciones" className="hover:text-white">
               Privacidad
-            </a>
+            </Link>
             <span className="mx-3 text-white/25">·</span>
-            <a href="/envios" className="hover:text-white">
+            <Link to="/envios" className="hover:text-white">
               Términos
-            </a>
+            </Link>
           </span>
         </div>
       </div>

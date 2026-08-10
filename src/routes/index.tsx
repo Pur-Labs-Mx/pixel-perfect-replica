@@ -5,6 +5,9 @@ import { ComparisonSection } from "@/components/landing/ComparisonSection";
 import { ConvertSection } from "@/components/landing/ConvertSection";
 import { FaqSection } from "@/components/landing/FaqSection";
 import { Hero } from "@/components/landing/Hero";
+import { LifestyleCarousel } from "@/components/landing/LifestyleCarousel";
+import { WaveBanner } from "@/components/landing/WaveBanner";
+import { VideoTestimonials } from "@/components/landing/VideoTestimonials";
 import { PlansSection } from "@/components/landing/PlansSection";
 import { PromiseSection } from "@/components/landing/PromiseSection";
 import { SignatureSection } from "@/components/landing/SignatureSection";
@@ -41,6 +44,9 @@ function Index() {
         </div>
 
         <ComparisonSection />
+        <LifestyleCarousel />
+        <WaveBanner />
+        <VideoTestimonials />
         <PlansSection />
         <PromiseSection />
         <FaqSection />
