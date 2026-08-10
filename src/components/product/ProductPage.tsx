@@ -98,7 +98,7 @@ export function ProductPage({ product }: { product: Product }) {
             <div className="relative order-2 md:order-1">
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
                 <img src={product.bgImage} alt="" loading="eager" className="h-full w-full object-cover object-center" />
-                <div className="pointer-events-none absolute inset-x-0 bottom-[24%] z-10 flex flex-col items-center">
+                <div className="pointer-events-none absolute inset-x-0 bottom-[0%] z-10 flex flex-col items-center">
                   <img
                     src={product.soapImage}
                     alt={`${product.name} — jabón perfumado`}
