@@ -22,6 +22,9 @@ import { Route as PacificChillRouteImport } from './routes/pacific-chill'
 import { Route as Producto04RouteImport } from './routes/producto-04'
 import { Route as Producto05RouteImport } from './routes/producto-05'
 import { Route as Producto06RouteImport } from './routes/producto-06'
+import { Route as Producto4RouteImport } from './routes/producto-4'
+import { Route as Producto5RouteImport } from './routes/producto-5'
+import { Route as Producto6RouteImport } from './routes/producto-6'
 import { Route as RastreaTuPedidoRouteImport } from './routes/rastrea-tu-pedido'
 
 const IndexRoute = IndexRouteImport.update({
@@ -89,6 +92,21 @@ const Producto06Route = Producto06RouteImport.update({
   path: '/producto-06',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Producto4Route = Producto4RouteImport.update({
+  id: '/producto-4',
+  path: '/producto-4',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Producto5Route = Producto5RouteImport.update({
+  id: '/producto-5',
+  path: '/producto-5',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Producto6Route = Producto6RouteImport.update({
+  id: '/producto-6',
+  path: '/producto-6',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RastreaTuPedidoRoute = RastreaTuPedidoRouteImport.update({
   id: '/rastrea-tu-pedido',
   path: '/rastrea-tu-pedido',
@@ -109,6 +127,9 @@ export interface FileRoutesByFullPath {
   '/producto-04': typeof Producto04Route
   '/producto-05': typeof Producto05Route
   '/producto-06': typeof Producto06Route
+  '/producto-4': typeof Producto4Route
+  '/producto-5': typeof Producto5Route
+  '/producto-6': typeof Producto6Route
   '/rastrea-tu-pedido': typeof RastreaTuPedidoRoute
 }
 export interface FileRoutesByTo {
@@ -125,6 +146,9 @@ export interface FileRoutesByTo {
   '/producto-04': typeof Producto04Route
   '/producto-05': typeof Producto05Route
   '/producto-06': typeof Producto06Route
+  '/producto-4': typeof Producto4Route
+  '/producto-5': typeof Producto5Route
+  '/producto-6': typeof Producto6Route
   '/rastrea-tu-pedido': typeof RastreaTuPedidoRoute
 }
 export interface FileRoutesById {
@@ -142,6 +166,9 @@ export interface FileRoutesById {
   '/producto-04': typeof Producto04Route
   '/producto-05': typeof Producto05Route
   '/producto-06': typeof Producto06Route
+  '/producto-4': typeof Producto4Route
+  '/producto-5': typeof Producto5Route
+  '/producto-6': typeof Producto6Route
   '/rastrea-tu-pedido': typeof RastreaTuPedidoRoute
 }
 export interface FileRouteTypes {
@@ -160,6 +187,9 @@ export interface FileRouteTypes {
     | '/producto-04'
     | '/producto-05'
     | '/producto-06'
+    | '/producto-4'
+    | '/producto-5'
+    | '/producto-6'
     | '/rastrea-tu-pedido'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -176,6 +206,9 @@ export interface FileRouteTypes {
     | '/producto-04'
     | '/producto-05'
     | '/producto-06'
+    | '/producto-4'
+    | '/producto-5'
+    | '/producto-6'
     | '/rastrea-tu-pedido'
   id:
     | '__root__'
@@ -192,6 +225,9 @@ export interface FileRouteTypes {
     | '/producto-04'
     | '/producto-05'
     | '/producto-06'
+    | '/producto-4'
+    | '/producto-5'
+    | '/producto-6'
     | '/rastrea-tu-pedido'
   fileRoutesById: FileRoutesById
 }
@@ -209,6 +245,9 @@ export interface RootRouteChildren {
   Producto04Route: typeof Producto04Route
   Producto05Route: typeof Producto05Route
   Producto06Route: typeof Producto06Route
+  Producto4Route: typeof Producto4Route
+  Producto5Route: typeof Producto5Route
+  Producto6Route: typeof Producto6Route
   RastreaTuPedidoRoute: typeof RastreaTuPedidoRoute
 }
 
@@ -305,6 +344,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Producto06RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/producto-4': {
+      id: '/producto-4'
+      path: '/producto-4'
+      fullPath: '/producto-4'
+      preLoaderRoute: typeof Producto4RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producto-5': {
+      id: '/producto-5'
+      path: '/producto-5'
+      fullPath: '/producto-5'
+      preLoaderRoute: typeof Producto5RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producto-6': {
+      id: '/producto-6'
+      path: '/producto-6'
+      fullPath: '/producto-6'
+      preLoaderRoute: typeof Producto6RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rastrea-tu-pedido': {
       id: '/rastrea-tu-pedido'
       path: '/rastrea-tu-pedido'
@@ -329,6 +389,9 @@ const rootRouteChildren: RootRouteChildren = {
   Producto04Route: Producto04Route,
   Producto05Route: Producto05Route,
   Producto06Route: Producto06Route,
+  Producto4Route: Producto4Route,
+  Producto5Route: Producto5Route,
+  Producto6Route: Producto6Route,
   RastreaTuPedidoRoute: RastreaTuPedidoRoute,
 }
 export const routeTree = rootRouteImport
