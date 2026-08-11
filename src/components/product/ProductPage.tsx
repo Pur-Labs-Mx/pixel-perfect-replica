@@ -98,13 +98,14 @@ export function ProductPage({ product }: { product: Product }) {
             <div className="relative order-2 md:order-1">
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
                 <img src={product.bgImage} alt="" loading="eager" className="h-full w-full object-cover object-center" />
-                <div className="pointer-events-none absolute inset-x-0 bottom-[24%] z-10 flex flex-col items-center">
+                <div className="pointer-events-none absolute inset-x-0 bottom-[20%] z-10 flex flex-col items-center md:bottom-[14%]">
                   <img
                     src={product.soapImage}
                     alt={`${product.name} — jabón perfumado`}
                     loading="eager"
-                    className="relative z-10 h-auto max-h-[38vh] w-auto drop-shadow-2xl sm:max-h-[38vh]"
+                    className="relative z-10 h-auto max-h-[38vh] w-auto drop-shadow-2xl sm:max-h-[40vh] md:max-h-[46vh]"
                   />
+
                   <img
                     src={product.soapImage}
                     alt=""
