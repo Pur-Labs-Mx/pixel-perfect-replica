@@ -106,7 +106,7 @@ export function ProductPage({ product }: { product: Product }) {
                     src={product.soapImage}
                     alt={`${product.name} — jabón perfumado`}
                     loading="eager"
-                    className="relative z-10 h-auto max-h-[46%] w-auto drop-shadow-2xl md:max-h-[52%]"
+                    className="relative z-10 h-auto max-h-[52%] w-auto max-w-[78%] object-contain drop-shadow-2xl md:max-h-[58%]"
                   />
 
                   <img
@@ -114,8 +114,9 @@ export function ProductPage({ product }: { product: Product }) {
                     alt=""
                     aria-hidden="true"
                     loading="eager"
-                    className="soap-reflection h-auto max-h-[16%] w-auto"
+                    className="soap-reflection h-auto max-h-[18%] w-auto max-w-[78%] object-contain"
                   />
+
                 </div>
               </div>
             </div>
