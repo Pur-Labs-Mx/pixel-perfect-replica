@@ -117,10 +117,9 @@ export function ProductPage({ product }: { product: Product }) {
                     className="soap-reflection h-auto max-h-[16%] w-auto"
                   />
                 </div>
-
-                </div>
               </div>
             </div>
+
             <div className="order-1 min-w-0 md:order-2">
               <div className="mb-4 flex flex-wrap items-center gap-2">
                 {product.hot && <HotBadge />}
