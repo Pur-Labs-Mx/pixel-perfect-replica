@@ -98,12 +98,15 @@ export function ProductPage({ product }: { product: Product }) {
             <div className="relative order-2 md:order-1">
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
                 <img src={product.bgImage} alt="" loading="eager" className="h-full w-full object-cover object-center" />
-                <div className="pointer-events-none absolute inset-x-0 bottom-[20%] z-10 flex flex-col items-center md:bottom-[14%]">
+                {/* Jabón superpuesto dentro del backstage. Tamaño relativo al
+                    contenedor (no a la altura de la ventana) para que la
+                    composición sea estable en cualquier pantalla. */}
+                <div className="pointer-events-none absolute inset-x-0 bottom-[16%] z-10 flex flex-col items-center md:bottom-[12%]">
                   <img
                     src={product.soapImage}
                     alt={`${product.name} — jabón perfumado`}
                     loading="eager"
-                    className="relative z-10 h-auto max-h-[38vh] w-auto drop-shadow-2xl sm:max-h-[40vh] md:max-h-[46vh]"
+                    className="relative z-10 h-auto max-h-[46%] w-auto drop-shadow-2xl md:max-h-[52%]"
                   />
 
                   <img
@@ -111,8 +114,10 @@ export function ProductPage({ product }: { product: Product }) {
                     alt=""
                     aria-hidden="true"
                     loading="eager"
-                    className="soap-reflection h-auto max-h-[16vh] w-auto sm:max-h-[18vh]"
+                    className="soap-reflection h-auto max-h-[16%] w-auto"
                   />
+                </div>
+
                 </div>
               </div>
             </div>
