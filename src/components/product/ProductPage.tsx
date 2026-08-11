@@ -101,7 +101,7 @@ export function ProductPage({ product }: { product: Product }) {
                 {/* Jabón superpuesto dentro del backstage. Tamaño relativo al
                     contenedor (no a la altura de la ventana) para que la
                     composición sea estable en cualquier pantalla. */}
-                <div className="pointer-events-none absolute inset-x-0 bottom-[16%] z-10 flex flex-col items-center md:bottom-[12%]">
+                <div className="pointer-events-none absolute inset-x-0 top-0 bottom-[16%] z-10 flex flex-col items-center justify-end md:bottom-[12%]">
                   <img
                     src={product.soapImage}
                     alt={`${product.name} — jabón perfumado`}
