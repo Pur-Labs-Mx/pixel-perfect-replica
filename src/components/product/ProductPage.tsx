@@ -252,17 +252,33 @@ export function ProductPage({ product }: { product: Product }) {
           </div>
         </section>
 
-        {/* GALERÍA */}
+        {/* GALERÍA — el backstage es el FONDO y el jabón va superpuesto dentro de él,
+            en un mismo espacio visual (nunca en dos columnas separadas). */}
         <section className="relative bg-[var(--black-deep)] px-6 py-20 sm:px-10 md:py-28">
-          <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-6 sm:grid-cols-2">
-            <div className="aspect-[4/5] w-full overflow-hidden rounded-2xl">
-              <img src={product.bgImage} alt="" loading="lazy" className="h-full w-full object-cover" />
-            </div>
-            <div className="aspect-[4/5] w-full overflow-hidden rounded-2xl bg-[#0a0a0a]">
-              <img src={product.soapImage} alt={`${product.name} — detalle`} loading="lazy" className="h-full w-full object-contain p-8 -translate-y-6" />
+          <div className="mx-auto max-w-[1200px]">
+            <div className="relative w-full overflow-hidden rounded-2xl aspect-[4/5] sm:aspect-[3/4] md:aspect-[16/10]">
+              <img
+                src={product.bgImage}
+                alt=""
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover object-center"
+              />
+              <div
+                className="pointer-events-none absolute inset-0"
+                style={{ background: `radial-gradient(60% 60% at 50% 60%, ${c}26, transparent 70%)` }}
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <img
+                  src={product.soapImage}
+                  alt={`${product.name} — detalle del jabón`}
+                  loading="lazy"
+                  className="h-auto max-h-[62%] w-auto object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.55)] md:max-h-[70%]"
+                />
+              </div>
             </div>
           </div>
         </section>
+
 
         {/* CARACTERÍSTICAS */}
         {product.features && product.features.length > 0 && (
