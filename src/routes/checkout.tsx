@@ -31,7 +31,8 @@ const REQUIRED_FIELDS = [
 ] as const;
 
 function CheckoutPage() {
-  const { items, subtotal, total } = useCart();
+  const { items, subtotal, total, clear } = useCart();
+  const navigate = useNavigate();
   const [values, setValues] = useState<Record<string, string>>({});
   const [errors, setErrors] = useState<Record<string, boolean>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -55,8 +56,32 @@ function CheckoutPage() {
       content_ids: items.map((i) => i.productId),
       num_items: items.reduce((sum, i) => sum + i.qty, 0),
     });
+
+    // Resumen sólo para esta sesión del navegador: no hay pedido real ni pago.
+    try {
+      window.sessionStorage.setItem(
+        LAST_REQUEST_KEY,
+        JSON.stringify({
+          name: values['nombre'] ?? "",
+          email: values['email'] ?? "",
+          total,
+          items: items.map((i) => ({
+            name: i.name,
+            variant: i.variant,
+            qty: i.qty,
+            unitPrice: i.unitPrice,
+          })),
+        }),
+      );
+    } catch {
+      /* almacenamiento no disponible */
+    }
+
     setSubmitted(true);
+    clear();
+    navigate({ to: "/gracias" });
   };
+
 
   return (
     <div className="min-h-screen bg-[var(--black-deep)]">
