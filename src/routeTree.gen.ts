@@ -17,6 +17,7 @@ import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as DevolucionesRouteImport } from './routes/devoluciones'
 import { Route as EnviosRouteImport } from './routes/envios'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as GraciasRouteImport } from './routes/gracias'
 import { Route as ImaginaRouteImport } from './routes/imagina'
 import { Route as PacificChillRouteImport } from './routes/pacific-chill'
 import { Route as Producto04RouteImport } from './routes/producto-04'
@@ -65,6 +66,11 @@ const EnviosRoute = EnviosRouteImport.update({
 const FaqRoute = FaqRouteImport.update({
   id: '/faq',
   path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GraciasRoute = GraciasRouteImport.update({
+  id: '/gracias',
+  path: '/gracias',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImaginaRoute = ImaginaRouteImport.update({
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/devoluciones': typeof DevolucionesRoute
   '/envios': typeof EnviosRoute
   '/faq': typeof FaqRoute
+  '/gracias': typeof GraciasRoute
   '/imagina': typeof ImaginaRoute
   '/pacific-chill': typeof PacificChillRoute
   '/producto-04': typeof Producto04Route
@@ -141,6 +148,7 @@ export interface FileRoutesByTo {
   '/devoluciones': typeof DevolucionesRoute
   '/envios': typeof EnviosRoute
   '/faq': typeof FaqRoute
+  '/gracias': typeof GraciasRoute
   '/imagina': typeof ImaginaRoute
   '/pacific-chill': typeof PacificChillRoute
   '/producto-04': typeof Producto04Route
@@ -161,6 +169,7 @@ export interface FileRoutesById {
   '/devoluciones': typeof DevolucionesRoute
   '/envios': typeof EnviosRoute
   '/faq': typeof FaqRoute
+  '/gracias': typeof GraciasRoute
   '/imagina': typeof ImaginaRoute
   '/pacific-chill': typeof PacificChillRoute
   '/producto-04': typeof Producto04Route
@@ -182,6 +191,7 @@ export interface FileRouteTypes {
     | '/devoluciones'
     | '/envios'
     | '/faq'
+    | '/gracias'
     | '/imagina'
     | '/pacific-chill'
     | '/producto-04'
@@ -201,6 +211,7 @@ export interface FileRouteTypes {
     | '/devoluciones'
     | '/envios'
     | '/faq'
+    | '/gracias'
     | '/imagina'
     | '/pacific-chill'
     | '/producto-04'
@@ -220,6 +231,7 @@ export interface FileRouteTypes {
     | '/devoluciones'
     | '/envios'
     | '/faq'
+    | '/gracias'
     | '/imagina'
     | '/pacific-chill'
     | '/producto-04'
@@ -240,6 +252,7 @@ export interface RootRouteChildren {
   DevolucionesRoute: typeof DevolucionesRoute
   EnviosRoute: typeof EnviosRoute
   FaqRoute: typeof FaqRoute
+  GraciasRoute: typeof GraciasRoute
   ImaginaRoute: typeof ImaginaRoute
   PacificChillRoute: typeof PacificChillRoute
   Producto04Route: typeof Producto04Route
@@ -307,6 +320,13 @@ declare module '@tanstack/react-router' {
       path: '/faq'
       fullPath: '/faq'
       preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gracias': {
+      id: '/gracias'
+      path: '/gracias'
+      fullPath: '/gracias'
+      preLoaderRoute: typeof GraciasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/imagina': {
@@ -384,6 +404,7 @@ const rootRouteChildren: RootRouteChildren = {
   DevolucionesRoute: DevolucionesRoute,
   EnviosRoute: EnviosRoute,
   FaqRoute: FaqRoute,
+  GraciasRoute: GraciasRoute,
   ImaginaRoute: ImaginaRoute,
   PacificChillRoute: PacificChillRoute,
   Producto04Route: Producto04Route,

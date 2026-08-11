@@ -98,23 +98,29 @@ export function ProductPage({ product }: { product: Product }) {
             <div className="relative order-2 md:order-1">
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
                 <img src={product.bgImage} alt="" loading="eager" className="h-full w-full object-cover object-center" />
-                <div className="pointer-events-none absolute inset-x-0 bottom-[24%] z-10 flex flex-col items-center">
+                {/* Jabón superpuesto dentro del backstage. Tamaño relativo al
+                    contenedor (no a la altura de la ventana) para que la
+                    composición sea estable en cualquier pantalla. */}
+                <div className="pointer-events-none absolute inset-x-0 top-0 bottom-[16%] z-10 flex flex-col items-center justify-end md:bottom-[12%]">
                   <img
                     src={product.soapImage}
                     alt={`${product.name} — jabón perfumado`}
                     loading="eager"
-                    className="relative z-10 h-auto max-h-[38vh] w-auto drop-shadow-2xl sm:max-h-[38vh]"
+                    className="relative z-10 h-auto max-h-[52%] w-auto max-w-[78%] object-contain drop-shadow-2xl md:max-h-[58%]"
                   />
+
                   <img
                     src={product.soapImage}
                     alt=""
                     aria-hidden="true"
                     loading="eager"
-                    className="soap-reflection h-auto max-h-[16vh] w-auto sm:max-h-[18vh]"
+                    className="soap-reflection h-auto max-h-[18%] w-auto max-w-[78%] object-contain"
                   />
+
                 </div>
               </div>
             </div>
+
             <div className="order-1 min-w-0 md:order-2">
               <div className="mb-4 flex flex-wrap items-center gap-2">
                 {product.hot && <HotBadge />}
@@ -251,17 +257,33 @@ export function ProductPage({ product }: { product: Product }) {
           </div>
         </section>
 
-        {/* GALERÍA */}
+        {/* GALERÍA — el backstage es el FONDO y el jabón va superpuesto dentro de él,
+            en un mismo espacio visual (nunca en dos columnas separadas). */}
         <section className="relative bg-[var(--black-deep)] px-6 py-20 sm:px-10 md:py-28">
-          <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-6 sm:grid-cols-2">
-            <div className="aspect-[4/5] w-full overflow-hidden rounded-2xl">
-              <img src={product.bgImage} alt="" loading="lazy" className="h-full w-full object-cover" />
-            </div>
-            <div className="aspect-[4/5] w-full overflow-hidden rounded-2xl bg-[#0a0a0a]">
-              <img src={product.soapImage} alt={`${product.name} — detalle`} loading="lazy" className="h-full w-full object-contain p-8 -translate-y-6" />
+          <div className="mx-auto max-w-[1200px]">
+            <div className="relative w-full overflow-hidden rounded-2xl aspect-[4/5] sm:aspect-[3/4] md:aspect-[16/10]">
+              <img
+                src={product.bgImage}
+                alt=""
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover object-center"
+              />
+              <div
+                className="pointer-events-none absolute inset-0"
+                style={{ background: `radial-gradient(60% 60% at 50% 60%, ${c}26, transparent 70%)` }}
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <img
+                  src={product.soapImage}
+                  alt={`${product.name} — detalle del jabón`}
+                  loading="lazy"
+                  className="h-auto max-h-[62%] w-auto object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.55)] md:max-h-[70%]"
+                />
+              </div>
             </div>
           </div>
         </section>
+
 
         {/* CARACTERÍSTICAS */}
         {product.features && product.features.length > 0 && (

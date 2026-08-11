@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { BuyButton } from "@/components/ui/BuyButton";
 import { SecondaryButton } from "@/components/ui/SecondaryButton";
@@ -8,80 +8,111 @@ import { products } from "@/data/catalog";
 
 const hero = products[0]!;
 
-/** Determina si el video debe omitirse (movimiento reducido o conexión lenta). */
+/** Volumen máximo del video del hero cuando el usuario activa el sonido. */
+const HERO_VOLUME = 0.35;
+
+/**
+ * Sólo se omite el video en conexiones explícitamente limitadas
+ * (ahorro de datos o 2G/3G). El movimiento reducido no lo desactiva:
+ * el hero es el elemento principal de la página y el video es su contenido.
+ */
 function shouldSkipVideo(): boolean {
   if (typeof window === "undefined") return true;
-  const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-  if (reducedMotion) return true;
   const nav = navigator as Navigator & {
     connection?: { saveData?: boolean; effectiveType?: string };
   };
   const connection = nav.connection;
   if (connection?.saveData) return true;
-  if (connection?.effectiveType && /2g|3g/.test(connection.effectiveType)) return true;
+  if (connection?.effectiveType && /(^|\b)(slow-2g|2g|3g)\b/.test(connection.effectiveType)) return true;
   return false;
 }
 
 export function Hero() {
-  const [videoReady, setVideoReady] = useState(false);
+  /** true sólo cuando el video está realmente reproduciéndose (evento `playing`). */
+  const [videoPlaying, setVideoPlaying] = useState(false);
   const [videoAllowed, setVideoAllowed] = useState(false);
+  const [soundOn, setSoundOn] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Difiere la carga del video a después de hidratación + primer idle,
-  // y sólo si la sección es visible y las condiciones de red/movimiento lo permiten.
+  // El video se monta en el primer frame tras la hidratación (el hero es
+  // visible de inmediato), salvo en conexiones limitadas.
   useEffect(() => {
     if (shouldSkipVideo()) return;
+    setVideoAllowed(true);
+  }, []);
 
-    let idleId: number | undefined;
-    let observer: IntersectionObserver | undefined;
-
-    const enable = () => setVideoAllowed(true);
-
-    const schedule = () => {
-      if ("requestIdleCallback" in window) {
-        idleId = window.requestIdleCallback(enable, { timeout: 2000 });
-      } else {
-        idleId = globalThis.setTimeout(enable, 300) as unknown as number;
-      }
-    };
-
-    if (sectionRef.current && "IntersectionObserver" in window) {
-      observer = new IntersectionObserver(
-        (entries) => {
-          if (entries.some((e) => e.isIntersecting)) {
-            schedule();
-            observer?.disconnect();
-          }
-        },
-        { threshold: 0.1 },
-      );
-      observer.observe(sectionRef.current);
-    } else {
-      schedule();
+  const tryPlay = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const p = video.play();
+    if (p && typeof p.catch === "function") {
+      p.catch(() => {
+        // Autoplay bloqueado: se reintenta en el primer gesto del usuario.
+      });
     }
-
-    return () => {
-      observer?.disconnect();
-      if (idleId !== undefined) {
-        if ("cancelIdleCallback" in window) window.cancelIdleCallback(idleId);
-        else globalThis.clearTimeout(idleId);
-      }
-    };
   }, []);
 
   useEffect(() => {
     if (!videoAllowed) return;
     const video = videoRef.current;
     if (!video) return;
+
+    const onPlaying = () => setVideoPlaying(true);
+    const onPause = () => setVideoPlaying(false);
+
+    video.addEventListener("playing", onPlaying);
+    video.addEventListener("pause", onPause);
+    video.addEventListener("canplay", tryPlay);
+
     video.load();
-    const onCanPlay = () => {
-      video.play().catch(() => {});
-      setVideoReady(true);
+    tryPlay();
+
+    // Reintento en el primer gesto del usuario y al volver a la pestaña.
+    const onGesture = () => tryPlay();
+    const onVisibility = () => {
+      if (!document.hidden) tryPlay();
     };
-    video.addEventListener("canplay", onCanPlay, { once: true });
-    return () => video.removeEventListener("canplay", onCanPlay);
-  }, [videoAllowed]);
+    window.addEventListener("pointerdown", onGesture);
+    window.addEventListener("touchstart", onGesture, { passive: true });
+    window.addEventListener("keydown", onGesture);
+    document.addEventListener("visibilitychange", onVisibility);
+
+    return () => {
+      video.removeEventListener("playing", onPlaying);
+      video.removeEventListener("pause", onPause);
+      video.removeEventListener("canplay", tryPlay);
+      window.removeEventListener("pointerdown", onGesture);
+      window.removeEventListener("touchstart", onGesture);
+      window.removeEventListener("keydown", onGesture);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [videoAllowed, tryPlay]);
+
+  /**
+   * El sonido sólo puede activarse con un gesto explícito del usuario
+   * (política de autoplay de los navegadores).
+   */
+  const toggleSound = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (soundOn) {
+      video.muted = true;
+      setSoundOn(false);
+      return;
+    }
+    video.muted = false;
+    video.volume = HERO_VOLUME;
+    const p = video.play();
+    if (p && typeof p.catch === "function") {
+      p.then(() => setSoundOn(true)).catch(() => {
+        video.muted = true;
+        setSoundOn(false);
+      });
+    } else {
+      setSoundOn(true);
+    }
+  };
 
   return (
     <section
@@ -97,7 +128,7 @@ export function Hero() {
             width={1448}
             height={1086}
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out ${
-              videoReady ? "opacity-0" : "opacity-100"
+              videoPlaying ? "opacity-0" : "opacity-100"
             }`}
             loading="eager"
             decoding="async"
@@ -106,12 +137,14 @@ export function Hero() {
           {videoAllowed && (
             <video
               ref={videoRef}
+              autoPlay
               muted
               loop
               playsInline
-              preload="none"
+              preload="auto"
+              disablePictureInPicture
               className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out ${
-                videoReady ? "opacity-100" : "opacity-0"
+                videoPlaying ? "opacity-100" : "opacity-0"
               }`}
             >
               <source src="/media/hero-video-desktop.webm" type="video/webm" />
@@ -183,6 +216,20 @@ export function Hero() {
           </div>
         </div>
       </div>
+
+      {/* Control discreto de sonido del video (sólo si el video se reproduce). */}
+      {videoPlaying && (
+        <button
+          type="button"
+          onClick={toggleSound}
+          aria-pressed={soundOn}
+          aria-label={soundOn ? "Silenciar el video" : "Activar el sonido del video"}
+          className="absolute right-6 bottom-16 z-20 inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/45 px-3 py-2 font-body text-[10px] tracking-[0.24em] uppercase text-white/80 backdrop-blur transition-colors duration-300 hover:border-[var(--tiffany)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--tiffany-active)] sm:right-10"
+        >
+          <span aria-hidden="true">{soundOn ? "🔊" : "🔇"}</span>
+          <span className="hidden sm:inline">{soundOn ? "Sonido" : "Activar sonido"}</span>
+        </button>
+      )}
 
       <div className="pointer-events-none absolute inset-x-6 bottom-6 z-10 flex items-end justify-between font-body text-[10px] tracking-[0.32em] uppercase text-[var(--smoke)] sm:inset-x-10">
         <span>Desliza para descubrir</span>

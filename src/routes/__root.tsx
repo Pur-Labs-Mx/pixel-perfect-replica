@@ -19,6 +19,8 @@ import { SocialProofDemo } from "@/components/conversion/SocialProofDemo";
 import { NewsletterPopup } from "@/components/conversion/NewsletterPopup";
 import { ExitIntentPopup } from "@/components/conversion/ExitIntentPopup";
 import { ConversionFlowProvider } from "@/components/conversion/ConversionFlowProvider";
+import { LiveChat } from "@/components/conversion/LiveChat";
+
 
 function NotFoundComponent() {
   return (
@@ -135,6 +137,8 @@ function RootComponent() {
           <SocialProofDemo />
           <NewsletterPopup />
           <ExitIntentPopup />
+          <LiveChat />
+
         </ConversionFlowProvider>
       </CartProvider>
     </QueryClientProvider>
