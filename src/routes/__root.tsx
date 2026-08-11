@@ -137,6 +137,8 @@ function RootComponent() {
           <SocialProofDemo />
           <NewsletterPopup />
           <ExitIntentPopup />
+          <LiveChat />
+
         </ConversionFlowProvider>
       </CartProvider>
     </QueryClientProvider>
