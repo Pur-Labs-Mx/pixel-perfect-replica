@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import type { FormEvent } from "react";
 
@@ -8,6 +8,8 @@ import { BuyButton } from "@/components/ui/BuyButton";
 import { useCart, formatMXN } from "@/lib/cart";
 import { pageMeta } from "@/lib/site";
 import { track } from "@/lib/analytics";
+import { LAST_REQUEST_KEY } from "@/routes/gracias";
+
 
 export const Route = createFileRoute("/checkout")({
   head: () =>
