@@ -49,7 +49,7 @@ export function SocialProofDemo() {
   return (
     <div
       aria-hidden="true"
-      className={`fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-4 z-[70] hidden max-w-[280px] sm:block transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+      className={`pointer-events-none fixed bottom-[calc(6rem+env(safe-area-inset-bottom))] left-4 z-[70] hidden max-w-[280px] sm:bottom-40 sm:block transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         visible ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
       }`}
     >
