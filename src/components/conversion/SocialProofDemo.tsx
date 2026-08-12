@@ -4,47 +4,86 @@ import { products } from "@/data/catalog";
 
 /**
  * ⚠️ DEMOSTRACIÓN — datos simulados, no reflejan pedidos reales.
- * Cuando exista backend de pedidos, reemplazar `FAKE_CITIES` y el índice
+ * Cuando exista backend de pedidos, reemplazar `DEMO_CITIES` y el índice
  * rotativo por un stream real de compras (websocket/polling a la API de
  * órdenes) y quitar la etiqueta "Demo".
+ *
+ * Intervalos (EDITABLE): el primer aviso aparece a los 90 s y después
+ * alterna 60 s / 90 s / 60 s… para no saturar la experiencia.
  */
 
-const FAKE_CITIES = ["Monterrey", "Guadalajara", "CDMX", "Puebla", "Querétaro"];
+/** EDITABLE — 25 ciudades de demostración. */
+const DEMO_CITIES = [
+  "Ciudad de México",
+  "Guadalajara",
+  "Monterrey",
+  "Puebla",
+  "Querétaro",
+  "Mérida",
+  "Tijuana",
+  "León",
+  "Cancún",
+  "Toluca",
+  "Chihuahua",
+  "Aguascalientes",
+  "San Luis Potosí",
+  "Mexicali",
+  "Hermosillo",
+  "Saltillo",
+  "Morelia",
+  "Veracruz",
+  "Oaxaca",
+  "Tuxtla Gutiérrez",
+  "Culiacán",
+  "Torreón",
+  "Acapulco",
+  "Tampico",
+  "Villahermosa",
+];
 
-const realProducts = products.filter((p) => !p.placeholder);
-
-const ROTATE_MS = 12000;
+/** EDITABLE — secuencia de esperas en segundos: 90 / 60 / 90 / 60… */
+const INTERVALS_S = [90, 60];
+/** EDITABLE — cuánto permanece visible cada aviso. */
+const VISIBLE_MS = 6000;
 
 export function SocialProofDemo() {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (typeof window === "undefined" || realProducts.length === 0) return;
+    if (typeof window === "undefined" || products.length === 0) return;
 
-    const showTimer = window.setTimeout(() => setVisible(true), 4000);
+    let step = 0;
+    let showTimer = 0;
+    let hideTimer = 0;
 
-    const interval = window.setInterval(() => {
-      setVisible(false);
-      window.setTimeout(() => {
-        setIndex((i) => (i + 1) % realProducts.length);
+    const schedule = () => {
+      const waitS = INTERVALS_S[step % INTERVALS_S.length] ?? 90;
+      showTimer = window.setTimeout(() => {
+        setIndex((i) => i + 1);
         setVisible(true);
-      }, 400);
-    }, ROTATE_MS);
+        hideTimer = window.setTimeout(() => {
+          setVisible(false);
+          step += 1;
+          schedule();
+        }, VISIBLE_MS);
+      }, waitS * 1000);
+    };
+
+    schedule();
 
     return () => {
       window.clearTimeout(showTimer);
-      window.clearInterval(interval);
+      window.clearTimeout(hideTimer);
     };
   }, []);
 
-  if (realProducts.length === 0) return null;
+  if (products.length === 0) return null;
 
-  const product = realProducts[index % realProducts.length];
-  const city = FAKE_CITIES[index % FAKE_CITIES.length];
+  const product = products[index % products.length];
+  const city = DEMO_CITIES[index % DEMO_CITIES.length];
   if (!product) return null;
   const name = product.displayName.join(" ");
-
 
   return (
     <div
