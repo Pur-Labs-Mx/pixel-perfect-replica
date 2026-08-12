@@ -1,5 +1,4 @@
 import type { CSSProperties } from "react";
-import { Link } from "@tanstack/react-router";
 
 import { BuyButton } from "@/components/ui/BuyButton";
 import { HotBadge } from "@/components/ui/HotBadge";
@@ -82,7 +81,7 @@ export function ProductCard({ product, id }: { product: Product; id?: string }) 
             {/* Jabón + reflejo: misma posición/escala para los 6 productos */}
             <div
               data-settle-soap={product.slug}
-              className="pointer-events-none absolute inset-x-0 bottom-[6%] z-20 flex flex-col items-center"
+              className="pointer-events-none absolute inset-x-0 top-0 bottom-[6%] z-20 flex flex-col items-center justify-end"
             >
               <div className="product-bed relative">
                 <div
@@ -94,7 +93,7 @@ export function ProductCard({ product, id }: { product: Product; id?: string }) 
                   src={product.soapImage}
                   alt={`${product.name} — jabón perfumado`}
                   loading="lazy"
-                  className="product-shadow relative z-10 h-auto max-h-[30vh] w-auto sm:max-h-[34vh] md:max-h-[38vh]"
+                  className="product-shadow relative z-10 h-auto max-h-[52%] w-auto max-w-[86%] object-contain sm:max-h-[58%] md:max-h-[62%]"
                 />
               </div>
               <img
@@ -102,7 +101,7 @@ export function ProductCard({ product, id }: { product: Product; id?: string }) 
                 alt=""
                 aria-hidden="true"
                 loading="lazy"
-                className="soap-reflection h-auto max-h-[14vh] w-auto sm:max-h-[16vh] md:max-h-[18vh]"
+                className="soap-reflection h-auto max-h-[13%] w-auto max-w-[86%] object-contain sm:max-h-[15%]"
               />
             </div>
           </div>
@@ -116,16 +115,10 @@ export function ProductCard({ product, id }: { product: Product; id?: string }) 
             </span>
             <div className="flex flex-wrap items-center gap-2">
               {isHot && <HotBadge />}
-              {product.placeholder ? (
-                <span className="inline-flex items-center rounded-full border border-white/25 px-2 py-[3px] font-body text-[9px] font-bold tracking-[0.24em] uppercase whitespace-nowrap text-white/60">
-                  Próximamente
-                </span>
-              ) : (
-                <span className="inline-flex items-center font-body text-[10px] tracking-[0.16em] uppercase whitespace-nowrap text-white/70">
-                  <span className="tabular-nums font-semibold">{product.stock}</span>
-                  <span className="ml-1">disponibles</span>
-                </span>
-              )}
+              <span className="inline-flex items-center font-body text-[10px] tracking-[0.16em] uppercase whitespace-nowrap text-white/70">
+                <span className="tabular-nums font-semibold">{product.stock}</span>
+                <span className="ml-1">disponibles</span>
+              </span>
             </div>
           </div>
           <p className="mt-6 font-heading text-base italic lowercase text-white/55">{product.family}</p>
@@ -166,12 +159,6 @@ export function ProductCard({ product, id }: { product: Product; id?: string }) 
               >
                 Comprar ahora
               </BuyButton>
-              <Link
-                to={`/${product.slug}` as string as never}
-                className="font-body text-[11px] tracking-[0.28em] uppercase text-white/70 underline-offset-4 hover:text-white hover:underline sm:self-center"
-              >
-                Ver la ficha
-              </Link>
             </div>
           </div>
           <p className="mt-12 font-heading text-2xl italic leading-tight text-white sm:text-3xl">{product.claim}</p>

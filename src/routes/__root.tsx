@@ -13,13 +13,9 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartProvider } from "@/lib/cart";
 import { LoadingScreen } from "@/components/landing/LoadingScreen";
-import { PersistentBuyCta } from "@/components/landing/PersistentBuyCta";
 import { AmbientAudio } from "@/components/conversion/AmbientAudio";
 import { SocialProofDemo } from "@/components/conversion/SocialProofDemo";
-import { NewsletterPopup } from "@/components/conversion/NewsletterPopup";
-import { ExitIntentPopup } from "@/components/conversion/ExitIntentPopup";
 import { ConversionFlowProvider } from "@/components/conversion/ConversionFlowProvider";
-import { LiveChat } from "@/components/conversion/LiveChat";
 
 
 function NotFoundComponent() {
@@ -132,12 +128,8 @@ function RootComponent() {
           <LoadingScreen />
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
-          <PersistentBuyCta />
           <AmbientAudio />
           <SocialProofDemo />
-          <NewsletterPopup />
-          <ExitIntentPopup />
-          <LiveChat />
 
         </ConversionFlowProvider>
       </CartProvider>
