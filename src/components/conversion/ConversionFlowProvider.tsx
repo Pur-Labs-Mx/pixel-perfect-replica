@@ -13,8 +13,8 @@ import { DownsellPopup } from "@/components/conversion/DownsellPopup";
  * al plan "single") o un plan ya armado con sus fragancias elegidas.
  */
 export type BuyFlowItem =
-  | { kind: "product"; product: Product }
-  | { kind: "plan"; plan: Plan; fragrances: string[] };
+  | { kind: "product"; product: Product; qty?: number }
+  | { kind: "plan"; plan: Plan; fragrances: string[]; qty?: number };
 
 type FlowStage = "idle" | "upsell" | "downsell";
 
@@ -63,6 +63,7 @@ export function ConversionFlowProvider({ children }: { children: ReactNode }) {
           variant: opts?.discountCode ? `${DOWNSELL_OFFER.label}` : "Pieza única",
           fragrances: [item.product.name],
           unitPrice: item.product.price,
+          qty: item.qty ?? 1,
         });
       } else {
         add({
@@ -73,6 +74,7 @@ export function ConversionFlowProvider({ children }: { children: ReactNode }) {
           variant: opts?.discountCode ? `${item.plan.title} · ${DOWNSELL_OFFER.label}` : item.plan.title,
           fragrances: item.fragrances,
           unitPrice: item.plan.price,
+          qty: item.qty ?? 1,
         });
       }
       setStage("idle");
@@ -108,7 +110,7 @@ export function ConversionFlowProvider({ children }: { children: ReactNode }) {
     if (!upsellPlan || !pendingItem) return;
     const fragrances =
       pendingItem.kind === "product" ? [pendingItem.product.name] : pendingItem.fragrances;
-    addToCartAndGo({ kind: "plan", plan: upsellPlan, fragrances }, undefined);
+    addToCartAndGo({ kind: "plan", plan: upsellPlan, fragrances, qty: pendingItem.qty ?? 1 }, undefined);
   }, [upsellPlan, pendingItem, addToCartAndGo]);
 
   const declineUpsell = useCallback(() => {

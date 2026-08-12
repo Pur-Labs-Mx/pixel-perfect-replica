@@ -32,7 +32,7 @@ export const LAST_REQUEST_KEY = "purlabs.lastRequest.v1";
 type RequestLine = { name: string; variant: string; qty: number; unitPrice: number };
 type LastRequest = { name?: string; email?: string; total?: number; items?: RequestLine[] };
 
-const crossSell = products.filter((p) => !p.placeholder).slice(0, 3);
+const crossSell = products.slice(0, 3);
 
 function makeReferralCode() {
   const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";

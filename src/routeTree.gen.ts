@@ -18,7 +18,10 @@ import { Route as DevolucionesRouteImport } from './routes/devoluciones'
 import { Route as EnviosRouteImport } from './routes/envios'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as GraciasRouteImport } from './routes/gracias'
+import { Route as HabentusRouteImport } from './routes/habentus'
 import { Route as ImaginaRouteImport } from './routes/imagina'
+import { Route as LAytonRouteImport } from './routes/l-ayton'
+import { Route as MillesimeRouteImport } from './routes/millesime'
 import { Route as PacificChillRouteImport } from './routes/pacific-chill'
 import { Route as Producto04RouteImport } from './routes/producto-04'
 import { Route as Producto05RouteImport } from './routes/producto-05'
@@ -73,9 +76,24 @@ const GraciasRoute = GraciasRouteImport.update({
   path: '/gracias',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HabentusRoute = HabentusRouteImport.update({
+  id: '/habentus',
+  path: '/habentus',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ImaginaRoute = ImaginaRouteImport.update({
   id: '/imagina',
   path: '/imagina',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LAytonRoute = LAytonRouteImport.update({
+  id: '/l-ayton',
+  path: '/l-ayton',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MillesimeRoute = MillesimeRouteImport.update({
+  id: '/millesime',
+  path: '/millesime',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PacificChillRoute = PacificChillRouteImport.update({
@@ -129,7 +147,10 @@ export interface FileRoutesByFullPath {
   '/envios': typeof EnviosRoute
   '/faq': typeof FaqRoute
   '/gracias': typeof GraciasRoute
+  '/habentus': typeof HabentusRoute
   '/imagina': typeof ImaginaRoute
+  '/l-ayton': typeof LAytonRoute
+  '/millesime': typeof MillesimeRoute
   '/pacific-chill': typeof PacificChillRoute
   '/producto-04': typeof Producto04Route
   '/producto-05': typeof Producto05Route
@@ -149,7 +170,10 @@ export interface FileRoutesByTo {
   '/envios': typeof EnviosRoute
   '/faq': typeof FaqRoute
   '/gracias': typeof GraciasRoute
+  '/habentus': typeof HabentusRoute
   '/imagina': typeof ImaginaRoute
+  '/l-ayton': typeof LAytonRoute
+  '/millesime': typeof MillesimeRoute
   '/pacific-chill': typeof PacificChillRoute
   '/producto-04': typeof Producto04Route
   '/producto-05': typeof Producto05Route
@@ -170,7 +194,10 @@ export interface FileRoutesById {
   '/envios': typeof EnviosRoute
   '/faq': typeof FaqRoute
   '/gracias': typeof GraciasRoute
+  '/habentus': typeof HabentusRoute
   '/imagina': typeof ImaginaRoute
+  '/l-ayton': typeof LAytonRoute
+  '/millesime': typeof MillesimeRoute
   '/pacific-chill': typeof PacificChillRoute
   '/producto-04': typeof Producto04Route
   '/producto-05': typeof Producto05Route
@@ -192,7 +219,10 @@ export interface FileRouteTypes {
     | '/envios'
     | '/faq'
     | '/gracias'
+    | '/habentus'
     | '/imagina'
+    | '/l-ayton'
+    | '/millesime'
     | '/pacific-chill'
     | '/producto-04'
     | '/producto-05'
@@ -212,7 +242,10 @@ export interface FileRouteTypes {
     | '/envios'
     | '/faq'
     | '/gracias'
+    | '/habentus'
     | '/imagina'
+    | '/l-ayton'
+    | '/millesime'
     | '/pacific-chill'
     | '/producto-04'
     | '/producto-05'
@@ -232,7 +265,10 @@ export interface FileRouteTypes {
     | '/envios'
     | '/faq'
     | '/gracias'
+    | '/habentus'
     | '/imagina'
+    | '/l-ayton'
+    | '/millesime'
     | '/pacific-chill'
     | '/producto-04'
     | '/producto-05'
@@ -253,7 +289,10 @@ export interface RootRouteChildren {
   EnviosRoute: typeof EnviosRoute
   FaqRoute: typeof FaqRoute
   GraciasRoute: typeof GraciasRoute
+  HabentusRoute: typeof HabentusRoute
   ImaginaRoute: typeof ImaginaRoute
+  LAytonRoute: typeof LAytonRoute
+  MillesimeRoute: typeof MillesimeRoute
   PacificChillRoute: typeof PacificChillRoute
   Producto04Route: typeof Producto04Route
   Producto05Route: typeof Producto05Route
@@ -329,11 +368,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GraciasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/habentus': {
+      id: '/habentus'
+      path: '/habentus'
+      fullPath: '/habentus'
+      preLoaderRoute: typeof HabentusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/imagina': {
       id: '/imagina'
       path: '/imagina'
       fullPath: '/imagina'
       preLoaderRoute: typeof ImaginaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/l-ayton': {
+      id: '/l-ayton'
+      path: '/l-ayton'
+      fullPath: '/l-ayton'
+      preLoaderRoute: typeof LAytonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/millesime': {
+      id: '/millesime'
+      path: '/millesime'
+      fullPath: '/millesime'
+      preLoaderRoute: typeof MillesimeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pacific-chill': {
@@ -405,7 +465,10 @@ const rootRouteChildren: RootRouteChildren = {
   EnviosRoute: EnviosRoute,
   FaqRoute: FaqRoute,
   GraciasRoute: GraciasRoute,
+  HabentusRoute: HabentusRoute,
   ImaginaRoute: ImaginaRoute,
+  LAytonRoute: LAytonRoute,
+  MillesimeRoute: MillesimeRoute,
   PacificChillRoute: PacificChillRoute,
   Producto04Route: Producto04Route,
   Producto05Route: Producto05Route,

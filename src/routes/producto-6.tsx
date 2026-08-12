@@ -1,15 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
-import { ProductPage } from "@/components/product/ProductPage";
-import { getProduct } from "@/data/catalog";
-import { pageMeta } from "@/lib/site";
-
+/** Ruta antigua conservada por compatibilidad: redirige a la landing canónica. */
 export const Route = createFileRoute("/producto-6")({
-  head: () =>
-    pageMeta({
-      title: "PRODUCTO 06 — Próximamente | PŪR LABS",
-      description: "Espacio preparado para el próximo lanzamiento de PŪR LABS. Muy pronto, más información.",
-      path: "/producto-6",
-    }),
-  component: () => <ProductPage product={getProduct("producto-6")!} />,
+  beforeLoad: () => {
+    throw redirect({ to: "/habentus" });
+  },
 });

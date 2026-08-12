@@ -198,7 +198,7 @@ export function Hero() {
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
-              <BuyButton href="#suscripciones" aria-label="Comprar ahora">
+              <BuyButton to={`/${hero.slug}`} aria-label={`Comprar ${hero.name}`}>
                 Comprar ahora
               </BuyButton>
 
