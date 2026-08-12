@@ -740,9 +740,10 @@ body {
     animation: none !important;
   }
   .buy-shine::after {
-    opacity: 0.35;
+    opacity: 0;
     animation: none !important;
   }
+
   .secondary-btn {
     transition: none !important;
   }
