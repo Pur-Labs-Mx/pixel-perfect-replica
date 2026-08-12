@@ -3,27 +3,39 @@ import { useEffect, useRef, useState } from "react";
 import { BuyButton } from "@/components/ui/BuyButton";
 import { PopupShell } from "@/components/conversion/PopupShell";
 import { claimPassiveSlot, releasePassiveSlot } from "@/components/conversion/popupCoordinator";
+import { hasIntent } from "@/lib/intentSignals";
 import { EXIT_OFFER } from "@/lib/site";
 
 /**
- * Popup de intención de salida.
- * Desktop: se dispara con mouseleave hacia arriba del viewport.
- * Móvil: se dispara con un back-gesture razonable (popstate) o al ocultarse
- * la pestaña (visibilitychange), lo cual aproxima el "voy a irme".
- * Solo una vez por sesión, y nunca a la vez que el newsletter
- * (comparten la clave "purlabs.popup.shown").
+ * Popup de intención de salida — SOLO se monta en las landings de producto.
+ *
+ * Condiciones obligatorias (ambas):
+ *  1. Al menos MIN_TIME_MS dentro de la landing (30 s, EDITABLE).
+ *  2. Alguna señal de intención: plan/cantidad, FAQ abierto o un carácter
+ *     escrito en un formulario (ver src/lib/intentSignals.ts).
+ *
+ * Disparadores de salida: mouseleave por arriba (desktop), back-gesture
+ * (popstate), pestaña oculta o scroll rápido hacia arriba (móvil).
+ * Una sola vez por sesión y nunca simultáneo al newsletter.
  */
+
+/** EDITABLE — tiempo mínimo de permanencia antes de poder mostrarse. */
+const MIN_TIME_MS = 30000;
 
 export function ExitIntentPopup() {
   const [open, setOpen] = useState(false);
   const triggeredRef = useRef(false);
-  
+
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (!EXIT_OFFER.enabled) return;
 
+    const mountedAt = Date.now();
+
     const trigger = () => {
       if (triggeredRef.current) return;
+      if (Date.now() - mountedAt < MIN_TIME_MS) return;
+      if (!hasIntent()) return;
       if (!claimPassiveSlot("exit")) return;
       triggeredRef.current = true;
       setOpen(true);
@@ -37,13 +49,10 @@ export function ExitIntentPopup() {
       if (document.visibilityState === "hidden") trigger();
     };
 
-    // Aproximación de back-gesture en móvil: empujamos un estado y
-    // escuchamos popstate, ya que no existe API estándar de back-gesture.
+    // Aproximación de back-gesture en móvil: no existe API estándar.
     history.pushState({ purlabsExitGuard: true }, "");
     const onPopState = () => trigger();
 
-    // Móvil: scroll rápido hacia arriba cerca del tope de la página, señal
-    // habitual de "me estoy yendo" cuando no existe mouseleave.
     let lastY = window.scrollY;
     let lastT = performance.now();
     const onScroll = () => {
@@ -88,7 +97,7 @@ export function ExitIntentPopup() {
       </p>
 
       <div className="mt-6 flex justify-center">
-        <BuyButton href="/#suscripciones" onClick={handleClose}>
+        <BuyButton href="#planes" onClick={handleClose}>
           Reclamar mi ritual
         </BuyButton>
       </div>
