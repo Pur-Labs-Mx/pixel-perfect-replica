@@ -1,8 +1,9 @@
 /**
  * Catálogo PŪR LABS.
  *
- * Fuente única de datos de la tienda. Cuando se conecte el backend,
- * basta con reemplazar estos objetos manteniendo la forma.
+ * Fuente única de datos de la tienda y de las landings individuales.
+ * Cuando se conecte el backend, basta con reemplazar estos objetos
+ * manteniendo la forma. NO duplicar esta información en componentes.
  */
 
 import imaginaBg from "@/assets/imagina-bg.webp";
@@ -26,16 +27,24 @@ export type Product = {
   discountPercent: number;
   stock: number;
   hot: boolean;
+  /** Frase corta que dice INMEDIATAMENTE a qué huele. */
+  firstImpression: string;
+  /** Referencia olfativa de inspiración (no es el producto oficial de la marca). */
+  inspiredBy: string;
   claim: string;
   description: string;
+  /** Cómo se siente durante la ducha. */
+  shower: string;
+  /** Momento ideal de uso. */
+  moment: string;
   notes: { label: string; value: string }[];
   signatureColor: string;
   glowColor: string;
   bgImage: string;
   soapImage: string;
-  /** Espacio preparado: los datos definitivos llegarán después. */
-  placeholder?: boolean;
-  /** Storytelling para la ficha individual. */
+  /** true = fotografía definitiva pendiente (se usa imagen provisional). */
+  photoPending?: boolean;
+  /** Storytelling para la landing individual. */
   story?: string;
   features?: string[];
 };
@@ -44,41 +53,13 @@ export const CURRENCY = "MXN";
 export const PROMO_LABEL = "Promoción de apertura";
 export const PIECE_WEIGHT = "180 g";
 
-// Placeholder editable: reemplazar name/displayName/family/claim/description/
-// notes/story/features/imágenes cuando el producto definitivo esté listo.
-// La estructura y el componente (ProductCard) NO cambian al actualizar datos.
-const placeholderProduct = (n: number, color: string, glow: string): Product => ({
-  id: `producto-${n}`,
-  slug: `producto-${n}`,
-  number: `0${n}`,
-  name: `PRODUCTO 0${n}`,
-  displayName: [`PRODUCTO 0${n}`],
-  family: "Próximamente",
-  price: 399,
-  compareAtPrice: 800,
-  discountPercent: 50,
-  stock: 0,
-  hot: false,
-  claim: "Una nueva fragancia de autor, muy pronto.",
-  description:
-    "Este espacio ya está preparado con el mismo sistema visual: al recibir foto, nombre, descripción y precio se integra automáticamente.",
-  notes: [
-    { label: "Primera impresión", value: "Se revelará en el lanzamiento." },
-    { label: "El corazón", value: "Se revelará en el lanzamiento." },
-    { label: "La estela", value: "Se revelará en el lanzamiento." },
-  ],
-  signatureColor: color,
-  glowColor: glow,
-  bgImage: placeholderBg,
-  soapImage: placeholderSoap,
-  placeholder: true,
-  story: "La historia de esta fragancia se compartirá muy pronto.",
-  features: [
-    `Pieza sólida de ${PIECE_WEIGHT}`,
-    "Detalles de composición: próximamente",
-    "Disponibilidad: próximamente",
-  ],
-});
+/** Características compartidas por toda la línea. EDITABLE. */
+const baseFeatures = [
+  `Pieza sólida de ${PIECE_WEIGHT}`,
+  "Glicerina vegetal translúcida",
+  "Curado de cuatro semanas",
+  "Aromaterapia sensorial durante el ritual de ducha",
+];
 
 export const products: Product[] = [
   {
@@ -93,25 +74,26 @@ export const products: Product[] = [
     discountPercent: 50,
     stock: 47,
     hot: true,
-    claim: "Huele a una idea que acaba de comenzar.",
+    firstImpression: "Jabón de ULTRA LUJO. Limpio, sofisticado y extremadamente elegante.",
+    inspiredBy: "Imagination, L.V.",
+    claim: "Huele a lujo silencioso: limpio, refinado, imposible de ignorar.",
     description:
-      "IMAGINA transforma la claridad de los cítricos, la profundidad del té negro y la calidez del ámbar en una experiencia limpia, sofisticada y expansiva.",
+      "Cítricos luminosos que abren, té negro que sostiene y un ámbar moderno que envuelve el vapor de la ducha. Elegancia limpia, sin ruido.",
+    shower:
+      "Al contacto con el agua caliente la espuma se abre y llena el baño de una atmósfera cítrica y aterciopelada.",
+    moment: "Mañana · trabajo · oficina",
     notes: [
       { label: "Primera impresión", value: "Bergamota y cítricos luminosos" },
-      { label: "El corazón", value: "Té negro y especias suaves" },
-      { label: "La estela", value: "Ámbar moderno, Ambrox y maderas suaves" },
+      { label: "Corazón aromático", value: "Té negro y especias suaves" },
+      { label: "Experiencia sensorial", value: "Ámbar moderno y maderas limpias en el vapor" },
     ],
     signatureColor: "#2E86C1",
     glowColor: "#8fe9ff",
     bgImage: imaginaBg,
     soapImage: imaginaSoap,
     story:
-      "Nace del momento exacto en que una idea aparece: cítricos que abren la mente, té negro que la sostiene y un ámbar que la deja resonando en la piel.",
-    features: [
-      `Pieza sólida de ${PIECE_WEIGHT}`,
-      "Glicerina vegetal translúcida",
-      "Curado de cuatro semanas",
-    ],
+      "Nace del momento exacto en que una idea aparece: cítricos que despiertan la mente, té negro que la sostiene y un ámbar que deja el aire distinto.",
+    features: baseFeatures,
   },
   {
     id: "bacarouge",
@@ -119,30 +101,32 @@ export const products: Product[] = [
     number: "02",
     name: "BACAROUGE",
     displayName: ["BACAROUGE"],
-    family: "Floral · Ámbar · Amaderado",
+    family: "Caramelo · Azafrán · Ámbar",
     price: 399,
     compareAtPrice: 800,
     discountPercent: 50,
     stock: 42,
     hot: true,
+    firstImpression: "Caramelo caliente, dulce y magnético. Un aroma que provoca una reacción inmediata.",
+    inspiredBy: "B. Rouge 540",
     claim: "Huele a piel tibia, cristal y presencia.",
-    description: "BACAROUGE es cálido, luminoso y magnético.",
+    description:
+      "Un dulzor cálido y mineral, envuelto en azafrán y maderas secas. Magnético desde el primer segundo, elegante hasta el último.",
+    shower:
+      "El vapor lo vuelve golosinado y sedoso: el baño queda con una estela dulce y luminosa que se percibe en el aire.",
+    moment: "Noche · casa · pareja",
     notes: [
-      { label: "Primera impresión", value: "Azafrán y jazmín transparente" },
-      { label: "El corazón", value: "Ámbar mineral y aire cálido" },
-      { label: "La estela", value: "Maderas secas, cedro y dulzor contenido" },
+      { label: "Primera impresión", value: "Caramelo cálido y azafrán" },
+      { label: "Corazón aromático", value: "Jazmín transparente y ámbar mineral" },
+      { label: "Experiencia sensorial", value: "Maderas secas y dulzor contenido en la atmósfera" },
     ],
     signatureColor: "#B01818",
     glowColor: "#ff9b9b",
     bgImage: bacarougeBg,
     soapImage: bacarougeSoap,
     story:
-      "Un rojo que no grita. Azafrán y jazmín sobre un ámbar mineral que se queda cerca de la piel, como una presencia que se recuerda después.",
-    features: [
-      `Pieza sólida de ${PIECE_WEIGHT}`,
-      "Glicerina vegetal translúcida",
-      "Curado de cuatro semanas",
-    ],
+      "Un rojo que no grita. Caramelo y azafrán sobre un ámbar mineral que convierte la ducha en un momento magnético.",
+    features: baseFeatures,
   },
   {
     id: "pacific-chill",
@@ -150,19 +134,24 @@ export const products: Product[] = [
     number: "03",
     name: "PACIFIC CHILL",
     displayName: ["PACIFIC", "CHILL"],
-    family: "Frutal · Cítrico · Verde",
+    family: "Cítrico · Acuático · Frutal",
     price: 399,
     compareAtPrice: 800,
     discountPercent: 50,
     stock: 32,
     hot: false,
+    firstImpression: "Fresco, frutal y limpio, como una bocanada de aire frío.",
+    inspiredBy: "Perfil cítrico-acuático, L.V.",
     claim: "Huele a una mañana que comienza de nuevo.",
     description:
-      "PACIFIC CHILL convierte la frescura frutal, los cítricos y las notas verdes en una sensación de energía limpia y movimiento.",
+      "Cidra, grosella negra y un verde acuático que despierta. Frescura limpia, luminosa, sin peso.",
+    shower:
+      "Refrescante y vibrante bajo el agua: deja el baño con una sensación de aire frío y fruta recién cortada.",
+    moment: "Mañana · deporte · días cálidos",
     notes: [
-      { label: "Primera impresión", value: "Cidra y naranja" },
-      { label: "El corazón", value: "Grosella negra y fruta vibrante" },
-      { label: "La estela", value: "Menta, ambreta y notas verdes suaves" },
+      { label: "Primera impresión", value: "Cidra y naranja fría" },
+      { label: "Corazón aromático", value: "Grosella negra y fruta acuática" },
+      { label: "Experiencia sensorial", value: "Menta, ambreta y notas verdes en el vapor" },
     ],
     signatureColor: "#7FD8C0",
     glowColor: "#d9fff7",
@@ -170,18 +159,113 @@ export const products: Product[] = [
     soapImage: pacificSoap,
     story:
       "Agua fría, fruta recién cortada y un verde limpio: la sensación de empezar otra vez, cada mañana, sin peso.",
-    features: [
-      `Pieza sólida de ${PIECE_WEIGHT}`,
-      "Glicerina vegetal translúcida",
-      "Curado de cuatro semanas",
-    ],
+    features: baseFeatures,
   },
-  placeholderProduct(4, "#8A8F98", "#dfe4ea"),
-  placeholderProduct(5, "#7E8B7A", "#dfe9dc"),
-  placeholderProduct(6, "#8B8074", "#e9e1d7"),
+  {
+    id: "l-ayton",
+    slug: "l-ayton",
+    number: "04",
+    name: "L'AYTON",
+    displayName: ["L'AYTON"],
+    family: "Manzana · Vainilla · Lavanda",
+    price: 399,
+    compareAtPrice: 800,
+    discountPercent: 50,
+    stock: 28,
+    hot: false,
+    firstImpression: "Manzana fresca, vainilla cremosa y una calidez elegante.",
+    inspiredBy: "Layton, P.D.M.",
+    claim: "Huele a elegancia tibia, con un filo de fruta fresca.",
+    description:
+      "Manzana luminosa sobre una vainilla cremosa y un fondo suave de lavanda y maderas. Cálido, pulido, adictivo.",
+    shower:
+      "La espuma se vuelve cremosa y el vapor deja una calidez afrutada que permanece en el baño.",
+    moment: "Noche · oficina · reuniones",
+    notes: [
+      { label: "Primera impresión", value: "Manzana fresca y bergamota" },
+      { label: "Corazón aromático", value: "Lavanda, jazmín y violeta" },
+      { label: "Experiencia sensorial", value: "Vainilla cremosa y maderas cálidas en la atmósfera" },
+    ],
+    signatureColor: "#4B5D8C",
+    glowColor: "#c3cdf5",
+    bgImage: placeholderBg,
+    soapImage: placeholderSoap,
+    photoPending: true,
+    story:
+      "Una manzana fría entrando en una habitación cálida: contraste elegante entre fruta y vainilla.",
+    features: baseFeatures,
+  },
+  {
+    id: "millesime",
+    slug: "millesime",
+    number: "05",
+    name: "MILLESIME",
+    displayName: ["MILLESIME"],
+    family: "Melón · Acuático · Almizcle limpio",
+    price: 399,
+    compareAtPrice: 800,
+    discountPercent: 50,
+    stock: 26,
+    hot: false,
+    firstImpression: "Melón fresco, fruta acuática y una sensación limpia, luminosa y sofisticada.",
+    inspiredBy: "M. Impérial, Creed",
+    claim: "Huele a agua fría sobre fruta madura.",
+    description:
+      "Melón y fruta acuática sobre un almizcle limpio. Luminoso, fresco y sofisticado de principio a fin.",
+    shower:
+      "Frescura acuática que abre el baño: el vapor queda limpio, ligero y luminoso.",
+    moment: "Mañana · verano · días largos",
+    notes: [
+      { label: "Primera impresión", value: "Melón y limón siciliano" },
+      { label: "Corazón aromático", value: "Fruta acuática y bergamota" },
+      { label: "Experiencia sensorial", value: "Almizcle limpio y ambreta en la atmósfera" },
+    ],
+    signatureColor: "#5F8F6B",
+    glowColor: "#cdeed8",
+    bgImage: placeholderBg,
+    soapImage: placeholderSoap,
+    photoPending: true,
+    story:
+      "El primer día de calor del año: fruta acuática, agua fría y una limpieza luminosa.",
+    features: baseFeatures,
+  },
+  {
+    id: "habentus",
+    slug: "habentus",
+    number: "06",
+    name: "HABENTUS",
+    displayName: ["HABENTUS"],
+    family: "Piña ahumada · Abedul · Maderas",
+    price: 399,
+    compareAtPrice: 800,
+    discountPercent: 50,
+    stock: 24,
+    hot: false,
+    firstImpression: "Piña ahumada, fruta intensa y una profundidad amaderada.",
+    inspiredBy: "Av., Creed",
+    claim: "Huele a fruta encendida sobre madera.",
+    description:
+      "Piña intensa envuelta en abedul ahumado y maderas oscuras. Rotundo, magnético, con carácter.",
+    shower:
+      "Bajo el agua caliente se vuelve profundo y ahumado: el baño queda con una atmósfera densa y elegante.",
+    moment: "Noche · frío · momentos de carácter",
+    notes: [
+      { label: "Primera impresión", value: "Piña y bergamota" },
+      { label: "Corazón aromático", value: "Abedul ahumado y jazmín" },
+      { label: "Experiencia sensorial", value: "Maderas oscuras y musgo en la atmósfera" },
+    ],
+    signatureColor: "#8B6B3A",
+    glowColor: "#f0d8ab",
+    bgImage: placeholderBg,
+    soapImage: placeholderSoap,
+    photoPending: true,
+    story:
+      "Fruta encendida sobre madera húmeda: el contraste entre dulzor y humo, convertido en ritual.",
+    features: baseFeatures,
+  },
 ];
 
-export const availableProducts = products.filter((p) => !p.placeholder);
+export const availableProducts = products;
 
 export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
 
@@ -248,7 +332,7 @@ export const comparisonRows: { feature: string; pur: boolean; common: boolean }[
   { feature: `Pieza sólida de ${PIECE_WEIGHT}`, pur: true, common: true },
   { feature: "Diseño de autor listo para regalo", pur: true, common: false },
   { feature: "Fórmula suave, sin sulfatos agresivos", pur: true, common: false },
-  { feature: "Estela perceptible después del baño", pur: true, common: false },
+  { feature: "Atmósfera aromática durante el ritual de ducha", pur: true, common: false },
 ];
 
 export const faqs: { question: string; answer: string }[] = [
@@ -272,12 +356,14 @@ export const faqs: { question: string; answer: string }[] = [
     answer: "OXXO, PayPal y Mercado Pago. Puedes pagar en efectivo en cualquier tienda OXXO.",
   },
   {
-    question: "¿Cuánto dura una pieza en uso diario?",
-    answer: "La duración exacta se publicará junto con los datos oficiales del laboratorio.",
+    question: "¿Sustituyen a un perfume?",
+    answer:
+      "No. La experiencia sucede durante la ducha: crean una atmósfera aromática alrededor del ritual, no una estela de perfume prolongada sobre la piel.",
   },
   {
-    question: "¿La fragancia permanece en la piel después del baño?",
-    answer: "Estamos documentando esta información con nuestro equipo perfumista; se publicará próximamente.",
+    question: "¿Están relacionados con las casas de perfume mencionadas?",
+    answer:
+      "No. Son jabones artesanales PŪR LABS inspirados libremente en perfiles olfativos de perfumería premium. No son productos oficiales ni están afiliados a esas marcas.",
   },
   {
     question: "¿Son aptos para piel sensible? ¿Qué ingredientes usan?",
