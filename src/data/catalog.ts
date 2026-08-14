@@ -74,7 +74,8 @@ export const products: Product[] = [
     discountPercent: 50,
     stock: 47,
     hot: true,
-    firstImpression: "Jabón de ULTRA LUJO. Limpio, sofisticado y extremadamente elegante.",
+    firstImpression:
+      "Jabón de ULTRA LUJO. Una sensación limpia, sofisticada y envolvente que transforma la ducha en un ritual de perfumería.",
     inspiredBy: "Imagination, L.V.",
     claim: "Huele a lujo silencioso: limpio, refinado, imposible de ignorar.",
     description:
@@ -107,7 +108,8 @@ export const products: Product[] = [
     discountPercent: 50,
     stock: 42,
     hot: true,
-    firstImpression: "Caramelo caliente, dulce y magnético. Un aroma que provoca una reacción inmediata.",
+    firstImpression:
+      "Caramelo caliente, dulce y magnético. Un aroma intenso que hace que la ducha se sienta como entrar en una perfumería de lujo.",
     inspiredBy: "B. Rouge 540",
     claim: "Huele a piel tibia, cristal y presencia.",
     description:
@@ -140,7 +142,8 @@ export const products: Product[] = [
     discountPercent: 50,
     stock: 32,
     hot: false,
-    firstImpression: "Fresco, frutal y limpio, como una bocanada de aire frío.",
+    firstImpression:
+      "Fresco, frutal y limpio. Una sensación fría y luminosa que despierta los sentidos desde la primera ducha.",
     inspiredBy: "Perfil cítrico-acuático, L.V.",
     claim: "Huele a una mañana que comienza de nuevo.",
     description:
@@ -173,7 +176,8 @@ export const products: Product[] = [
     discountPercent: 50,
     stock: 28,
     hot: false,
-    firstImpression: "Manzana fresca, vainilla cremosa y una calidez elegante.",
+    firstImpression:
+      "Manzana fresca, vainilla cremosa y una calidez elegante. Una ducha sofisticada, dulce y envolvente.",
     inspiredBy: "Layton, P.D.M.",
     claim: "Huele a elegancia tibia, con un filo de fruta fresca.",
     description:
@@ -207,7 +211,8 @@ export const products: Product[] = [
     discountPercent: 50,
     stock: 26,
     hot: false,
-    firstImpression: "Melón fresco, fruta acuática y una sensación limpia, luminosa y sofisticada.",
+    firstImpression:
+      "Melón fresco, fruta acuática y una sensación limpia y luminosa. Un aroma ligero, elegante y refrescante.",
     inspiredBy: "M. Impérial, Creed",
     claim: "Huele a agua fría sobre fruta madura.",
     description:
@@ -241,7 +246,8 @@ export const products: Product[] = [
     discountPercent: 50,
     stock: 24,
     hot: false,
-    firstImpression: "Piña ahumada, fruta intensa y una profundidad amaderada.",
+    firstImpression:
+      "Piña ahumada, fruta intensa y profundidad amaderada. Una experiencia poderosa, masculina y sofisticada.",
     inspiredBy: "Av., Creed",
     claim: "Huele a fruta encendida sobre madera.",
     description:
