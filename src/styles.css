@@ -730,8 +730,7 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .cta-shine::before,
-  .buy-shine::before {
+  .cta-shine::before {
     opacity: 0;
     animation: none !important;
   }
@@ -739,9 +738,20 @@ body {
     opacity: 0.2;
     animation: none !important;
   }
+
+  /* EXCEPCIONES DELIBERADAS con movimiento reducido:
+     el destello del botón de compra y la deriva de las ondas son parte de
+     la identidad de marca, así que se conservan en versión LENTA y suave
+     (no parpadean, no se detienen) en lugar de anularse por completo. */
+  .buy-shine::before {
+    animation: buy-sheen 9s cubic-bezier(0.22, 1, 0.36, 1) 1.4s infinite !important;
+  }
   .buy-shine::after {
-    opacity: 0;
-    animation: none !important;
+    animation: buy-border-sheen 9s cubic-bezier(0.22, 1, 0.36, 1) 1.4s infinite !important;
+  }
+  .pur-wave-drift {
+    animation-duration: 70s !important;
+    animation-iteration-count: infinite !important;
   }
 
   .secondary-btn {
@@ -749,6 +759,34 @@ body {
   }
   [style*="pur-marquee"] {
     animation: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Ondas decorativas (WaveBanner) — definidas aquí para no duplicar
+   CSS por instancia. Deriva horizontal continua y entrelazada.
+   --------------------------------------------------------------- */
+.pur-wave-drift {
+  will-change: transform;
+}
+.pur-wave-back {
+  animation: pur-wave-x 42s ease-in-out infinite;
+}
+.pur-wave-mid {
+  animation: pur-wave-x 30s ease-in-out infinite reverse;
+}
+.pur-wave-front {
+  animation: pur-wave-x 24s ease-in-out infinite;
+}
+@keyframes pur-wave-x {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(2.5%);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
 

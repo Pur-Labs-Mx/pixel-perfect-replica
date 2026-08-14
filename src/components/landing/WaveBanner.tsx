@@ -50,24 +50,9 @@ export function WaveBanner({ className = "", height = "6rem" }: WaveBannerProps)
         />
       </svg>
 
-      <style>{`
-        .pur-wave-drift {
-          will-change: transform;
-        }
-        .pur-wave-back { animation: pur-wave-x 42s ease-in-out infinite; }
-        .pur-wave-mid { animation: pur-wave-x 30s ease-in-out infinite reverse; }
-        .pur-wave-front { animation: pur-wave-x 24s ease-in-out infinite; }
+      {/* Las animaciones (.pur-wave-drift / @keyframes pur-wave-x) viven en
+          src/styles.css para no duplicar CSS ni pausarse con movimiento reducido. */}
 
-        @keyframes pur-wave-x {
-          0% { transform: translateX(0); }
-          50% { transform: translateX(2%); }
-          100% { transform: translateX(0); }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .pur-wave-drift { animation: none !important; }
-        }
-      `}</style>
     </div>
   );
 }
