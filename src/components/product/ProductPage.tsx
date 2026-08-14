@@ -181,24 +181,24 @@ export function ProductPage({ product }: { product: Product }) {
           </div>
         </section>
 
-        {/* 9-12 · EXPERIENCIA Y PERFIL OLFATIVO */}
-        <section className="relative bg-[#0a0a0a] px-6 py-20 text-[var(--white-soft)] sm:px-10 md:py-28">
+        {/* 9-12 · PERFIL OLFATIVO — información SECUNDARIA, compacta */}
+        <section className="relative bg-[#0a0a0a] px-6 py-12 text-[var(--white-soft)] sm:px-10">
           <div className="mx-auto max-w-[1000px]">
-            <span className="text-[10px] font-medium tracking-[0.32em] uppercase text-white/50">
-              Perfil olfativo
-            </span>
-            <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-3">
-              {product.notes.map((note, i) => (
-                <div key={note.label} className="border-t border-white/12 pt-6">
-                  <p className="font-body text-[9px] tracking-[0.32em] uppercase text-white/45">
-                    {String(i + 1).padStart(2, "0")} · {note.label}
-                  </p>
-                  <p className="mt-3 font-heading text-lg italic text-white">{note.value}</p>
-                </div>
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+              <span className="font-body text-[9px] tracking-[0.32em] uppercase text-white/40">
+                Perfil olfativo
+              </span>
+              {product.notes.map((note) => (
+                <span
+                  key={note.label}
+                  className="inline-flex items-center rounded-full border border-white/12 px-3 py-1 font-body text-[11px] text-white/70"
+                >
+                  {note.value}
+                </span>
               ))}
             </div>
-            <p className="mt-8 font-body text-[11px] leading-relaxed text-white/40">
-              Las notas describen el perfil aromático de la pieza, no la lista de ingredientes del jabón.
+            <p className="mt-4 font-body text-[10px] leading-relaxed text-white/35">
+              Describe el aroma de la pieza durante la ducha, no la lista de ingredientes.
             </p>
           </div>
         </section>
@@ -245,15 +245,16 @@ export function ProductPage({ product }: { product: Product }) {
                   src={product.soapImage}
                   alt={`${product.name} — detalle del jabón`}
                   loading="lazy"
-                  className="h-auto max-h-[68%] w-auto max-w-[80%] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.55)]"
+                  className="mx-auto h-auto max-h-[80%] w-auto max-w-[88%] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.55)]"
                 />
                 <img
                   src={product.soapImage}
                   alt=""
                   aria-hidden="true"
                   loading="lazy"
-                  className="soap-reflection h-auto max-h-[14%] w-auto max-w-[80%] object-contain"
+                  className="soap-reflection mx-auto h-auto max-h-[16%] w-auto max-w-[88%] object-contain"
                 />
+
               </div>
             </div>
           </div>
