@@ -112,20 +112,21 @@ export function ProductPage({ product }: { product: Product }) {
                   loading="eager"
                   className="h-full w-full object-cover object-center"
                 />
-                {/* Jabón superpuesto DENTRO del backstage, centrado y sin clipping. */}
-                <div className="pointer-events-none absolute inset-x-0 top-0 bottom-[12%] z-10 flex flex-col items-center justify-end">
+                {/* Jabón superpuesto DENTRO del backstage: ~30% más grande,
+                    centrado en los dos ejes y sin clipping. */}
+                <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center">
                   <img
                     src={product.soapImage}
-                    alt={`${product.name} — jabón perfumado de ${180} g`}
+                    alt={`${product.name} — jabón perfumado de 180 g`}
                     loading="eager"
-                    className="relative z-10 h-auto max-h-[66%] w-auto max-w-[86%] object-contain drop-shadow-2xl"
+                    className="relative z-10 mx-auto h-auto max-h-[80%] w-auto max-w-[92%] object-contain drop-shadow-2xl"
                   />
                   <img
                     src={product.soapImage}
                     alt=""
                     aria-hidden="true"
                     loading="lazy"
-                    className="soap-reflection h-auto max-h-[16%] w-auto max-w-[86%] object-contain"
+                    className="soap-reflection mx-auto h-auto max-h-[17%] w-auto max-w-[92%] object-contain"
                   />
                 </div>
               </div>

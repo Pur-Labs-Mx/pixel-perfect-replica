@@ -79,11 +79,12 @@ export function ProductCard({ product, id }: { product: Product; id?: string }) 
             />
 
             {/* Jabón + reflejo: misma posición/escala para los 6 productos */}
+            {/* Jabón ~30% más grande y centrado en los dos ejes dentro del backstage. */}
             <div
               data-settle-soap={product.slug}
-              className="pointer-events-none absolute inset-x-0 top-0 bottom-[6%] z-20 flex flex-col items-center justify-end"
+              className="pointer-events-none absolute inset-0 z-20 flex flex-col items-center justify-center"
             >
-              <div className="product-bed relative">
+              <div className="product-bed relative flex justify-center">
                 <div
                   aria-hidden="true"
                   className="signature-glow pointer-events-none absolute left-1/2 top-1/2 -z-[1] h-[130%] w-[130%] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
@@ -93,7 +94,7 @@ export function ProductCard({ product, id }: { product: Product; id?: string }) 
                   src={product.soapImage}
                   alt={`${product.name} — jabón perfumado`}
                   loading="lazy"
-                  className="product-shadow relative z-10 h-auto max-h-[52%] w-auto max-w-[86%] object-contain sm:max-h-[58%] md:max-h-[62%]"
+                  className="product-shadow relative z-10 mx-auto h-auto max-h-[68%] w-auto max-w-[92%] object-contain sm:max-h-[75%] md:max-h-[80%]"
                 />
               </div>
               <img
@@ -101,7 +102,7 @@ export function ProductCard({ product, id }: { product: Product; id?: string }) 
                 alt=""
                 aria-hidden="true"
                 loading="lazy"
-                className="soap-reflection h-auto max-h-[13%] w-auto max-w-[86%] object-contain sm:max-h-[15%]"
+                className="soap-reflection mx-auto h-auto max-h-[16%] w-auto max-w-[92%] object-contain sm:max-h-[18%]"
               />
             </div>
           </div>
